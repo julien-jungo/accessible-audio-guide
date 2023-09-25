@@ -1,29 +1,23 @@
-import { Component, OnInit } from '@angular/core';
+import { Component } from '@angular/core';
+import { SpeechService } from "./services/speech.service";
 
 @Component({
   selector: 'app-root',
   templateUrl: './app.component.html',
   styleUrls: ['./app.component.scss']
 })
-export class AppComponent implements OnInit {
+export class AppComponent {
 
   public text = 'Hello World';
 
-  private synthesis?: SpeechSynthesis;
-  private voice?: SpeechSynthesisVoice;
-
-  ngOnInit() {
-    this.synthesis = window.speechSynthesis;
-    this.voice = this.synthesis.getVoices()
-      .filter(voice => voice.lang === 'en')[0];
-  }
+  constructor(private readonly speechService: SpeechService) {}
 
   speak() {
-    const utterance = new SpeechSynthesisUtterance(this.text);
-
-    utterance.voice = this.voice!;
-
-    this.synthesis?.speak(utterance);
+    try {
+      this.speechService.speak(this.text);
+    } catch (error) {
+      console.error('Speech Synthesis is not available');
+    }
   }
 
 }
