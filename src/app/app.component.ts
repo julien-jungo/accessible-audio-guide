@@ -8,16 +8,12 @@ import { SpeechService } from "./services/speech.service";
 })
 export class AppComponent {
 
-  public text = 'Hello World';
+  public text = 'Hallo Welt';
 
   constructor(private readonly speechService: SpeechService) {}
 
-  speak() {
-    try {
-      this.speechService.speak(this.text);
-    } catch (error) {
-      console.error('Speech Synthesis is not available');
-    }
+  public speak(): void {
+    this.speechService.speak({ text: this.text, lang: 'de-DE' });
   }
 
 }

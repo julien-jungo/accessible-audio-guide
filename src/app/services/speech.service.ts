@@ -1,31 +1,43 @@
 import { Injectable } from '@angular/core';
 
+export interface Utterance {
+  text: string;
+  lang: string;
+}
+
 @Injectable({
   providedIn: 'root'
 })
 export class SpeechService {
 
-  private synthesis?: SpeechSynthesis;
-
-  private readonly available: boolean = false;
+  private readonly synthesis?: SpeechSynthesis;
+  private readonly utterance?: SpeechSynthesisUtterance;
 
   constructor() {
     if ('speechSynthesis' in window) {
       this.synthesis = window.speechSynthesis;
-      this.available = true;
+      this.utterance = new SpeechSynthesisUtterance();
     }
   }
 
-  isAvailable() {
-    return this.available;
+  public isAvailable(): boolean {
+    return this.synthesis !== undefined;
   }
 
-  speak(text: string) {
+  public speak({ text, lang }: Utterance): void {
     if (this.isAvailable()) {
-      const utterance = new SpeechSynthesisUtterance(text);
-      this.synthesis?.speak(utterance);
-    } else {
-      throw new Error();
+      this.synthesis!.cancel();
+      this.utterance!.text = text;
+      this.utterance!.lang = lang;
+      this.synthesis!.speak(this.utterance!);
     }
+  }
+
+  public pause(): void {
+    this.synthesis?.pause();
+  }
+
+  public resume(): void {
+    this.synthesis?.resume();
   }
 }
