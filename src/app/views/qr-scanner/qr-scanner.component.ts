@@ -1,5 +1,7 @@
 import { AfterViewInit, Component, ElementRef, ViewChild } from '@angular/core';
-import { ScannerService } from "../../services/scanner-service";
+import { ScannerService } from "../../services/scanner.service";
+import { GuideService } from "../../services/guide.service";
+import { Router } from "@angular/router";
 
 @Component({
   selector: 'app-qr-scanner',
@@ -11,12 +13,29 @@ export class QrScannerComponent implements AfterViewInit {
   @ViewChild('video')
   private video?: ElementRef;
 
-  constructor(private readonly scannerService: ScannerService) {}
+  public ready: boolean = false;
+
+  constructor(
+    private readonly scannerService: ScannerService,
+    private readonly guideService: GuideService,
+    private readonly router: Router
+  ) {}
 
   ngAfterViewInit() {
     this.scannerService.scan({
       element: this.video!.nativeElement,
-      onResult: result => console.log(result)
+      onResult: (result, destroy) => {
+        if (this.ready && result !== '') {
+          this.guideService.setGuide(result);
+          this.router.navigateByUrl('reader').then(destroy);
+        }
+      },
+      onStartup: () => {
+        // prevent camera glitches
+        setTimeout(() => {
+          this.ready = true;
+        }, 500);
+      }
     });
   }
 }

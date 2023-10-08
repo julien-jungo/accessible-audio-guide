@@ -3,7 +3,8 @@ import QrScanner from "qr-scanner";
 
 export interface ScanConfig {
   element: HTMLVideoElement;
-  onResult: (result: string) => void;
+  onStartup: () => void;
+  onResult: (result: string, destroy: () => void) => void;
 }
 
 @Injectable({
@@ -13,11 +14,14 @@ export class ScannerService {
 
   constructor() {}
 
-  public scan({ element, onResult }: ScanConfig) {
+  public scan({ element, onResult, onStartup }: ScanConfig) {
     const scanner = new QrScanner(
       element,
       result => {
-        onResult(result.data);
+        onResult(
+          result.data,
+          () => scanner.destroy()
+        );
       },
       {
         calculateScanRegion: video => {
@@ -29,6 +33,6 @@ export class ScannerService {
       }
     );
 
-    void scanner.start();
+    scanner.start().then(onStartup);
   }
 }

@@ -1,1 +1,4 @@
-<video #video class="w-screen h-screen object-cover"></video>
+<div class="relative w-screen h-screen">
+  <video #video class="w-full h-full object-cover"></video>
+  <div *ngIf="!ready" class="absolute top-0 w-full h-full bg-black"></div>
+</div>
