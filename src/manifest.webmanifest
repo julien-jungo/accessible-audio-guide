@@ -1,9 +1,11 @@
 {
-  "name": "accessible-audio-guide",
-  "short_name": "accessible-audio-guide",
-  "theme_color": "#1976d2",
-  "background_color": "#fafafa",
+  "name": "Audio Guide",
+  "short_name": "Audio Guide",
+  "theme_color": "#ffffff",
+  "background_color": "#ffffff",
   "display": "standalone",
+  "orientation": "portrait",
+  "lang": "de-DE",
   "scope": "./",
   "start_url": "./",
   "icons": [
