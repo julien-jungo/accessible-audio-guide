@@ -1,16 +1,16 @@
 import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
-import { HelloWorldComponent } from "./views/hello-world/hello-world.component";
 import { QrScannerComponent } from "./views/qr-scanner/qr-scanner.component";
+import { ReaderComponent } from "./views/reader/reader.component";
 
 const routes: Routes = [
   {
     path: '',
-    component: HelloWorldComponent
+    component: QrScannerComponent
   },
   {
-    path: 'scan',
-    component: QrScannerComponent
+    path: 'reader',
+    component: ReaderComponent
   }
 ];
 
