@@ -1,4 +1,4 @@
-<div class="h-full w-full relative">
+<div *ngIf="ready" class="h-full w-full relative">
   <div class="max-w-md h-screen mx-auto p-5">
     <p class="cursor-pointer" (click)="speak()">
       {{ guide }}

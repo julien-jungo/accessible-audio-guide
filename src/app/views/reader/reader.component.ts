@@ -9,7 +9,9 @@ import { SpeechService } from "../../services/speech.service";
 })
 export class ReaderComponent implements OnInit {
 
-  public guide!: string;
+  public ready: boolean = false;
+
+  public guide: string = 'Kein Text verfügbar';
 
   constructor(
     private readonly guideService: GuideService,
@@ -17,12 +19,15 @@ export class ReaderComponent implements OnInit {
   ) {}
 
   public ngOnInit() {
-    this.guide = this.guideService.getGuide() || 'Kein Text verfügbar';
+    this.guideService.observe().subscribe(guide => {
+      this.guide = guide || this.guide;
+      this.ready = true;
+    });
   }
 
   public speak() {
     this.speechService.speak({
-      text: this.guide!,
+      text: this.guide,
       lang: 'de-DE',
     })
   }
