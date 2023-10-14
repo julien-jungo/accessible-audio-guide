@@ -1,6 +1,6 @@
 import { AfterViewInit, Component, ElementRef, ViewChild } from '@angular/core';
 import { ScannerService } from "../../services/scanner.service";
-import { GuideService } from "../../services/guide.service";
+import { ContentService } from "../../services/content.service";
 import { Router } from "@angular/router";
 
 @Component({
@@ -17,7 +17,7 @@ export class QrScannerComponent implements AfterViewInit {
 
   constructor(
     private readonly scannerService: ScannerService,
-    private readonly guideService: GuideService,
+    private readonly contentService: ContentService,
     private readonly router: Router
   ) {}
 
@@ -26,7 +26,7 @@ export class QrScannerComponent implements AfterViewInit {
       element: this.video!.nativeElement,
       onResult: (result, destroy) => {
         if (this.ready && result !== '') {
-          this.guideService.target(result);
+          this.contentService.target(result);
           this.router.navigateByUrl('reader').then(destroy);
         }
       },

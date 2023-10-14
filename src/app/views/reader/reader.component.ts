@@ -1,5 +1,4 @@
 import { Component, OnInit } from '@angular/core';
-import { GuideService } from "../../services/guide.service";
 import { SpeechService } from "../../services/speech.service";
 import { ContentService, Element } from "../../services/content.service";
 
@@ -16,12 +15,11 @@ export class ReaderComponent implements OnInit {
 
   constructor(
     private readonly contentService: ContentService,
-    private readonly guideService: GuideService,
     private readonly speechService: SpeechService,
   ) {}
 
   public ngOnInit() {
-    this.guideService.observe().subscribe(guide => {
+    this.contentService.request().subscribe(guide => {
       this.guide = guide || this.guide;
       this.ready = true;
     });
