@@ -1,6 +1,6 @@
 import { Injectable } from '@angular/core';
 import { Observable, of } from "rxjs";
-import { ContentService } from "./content.service";
+import { ContentService, Element } from "./content.service";
 
 @Injectable({
   providedIn: 'root'
@@ -15,7 +15,7 @@ export class GuideService {
     this.url = url;
   }
 
-  public observe(): Observable<string | undefined> {
+  public observe(): Observable<Array<Element> | undefined> {
     return (this.url) ? this.contentService.request(this.url) : of(undefined);
   }
 }
