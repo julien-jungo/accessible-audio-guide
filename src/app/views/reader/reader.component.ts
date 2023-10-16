@@ -25,17 +25,19 @@ export class ReaderComponent implements OnInit {
     this.contentService.request().subscribe(guide => {
       this.guide = guide || this.guide;
       this.ready = true;
+      this.speak();
     });
   }
 
   public set(index: number) {
     this.current = index;
-    document.getElementById('' + index)!
+    document
+      .getElementById('' + index)!
       .scrollIntoView({
         behavior: "smooth",
-        inline: "nearest",
-        block: "end",
+        block: "nearest",
     });
+    this.speak();
   }
 
   public next() {

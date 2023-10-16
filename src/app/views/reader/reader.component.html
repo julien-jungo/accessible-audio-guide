@@ -1,7 +1,10 @@
 <div *ngIf="ready" class="h-full w-full relative">
-  <div class="max-w-screen-sm mx-auto p-5" (swipeleft)="prev(); speak()" (swiperight)="next(); speak()">
+  <div class="max-w-screen-sm mx-auto p-5"
+       (swipeleft)="prev()" (swiperight)="next()">
     <ng-container *ngFor="let element of guide; index as i">
-      <div [ngSwitch]="element.tag" [id]="i" [ngClass]="{ 'outline outline-1 outline-offset-2': i === current }" (tap)="set(i); speak()" class="cursor-pointer mb-3">
+      <div [ngSwitch]="element.tag" [id]="i" (tap)="set(i)"
+           [ngClass]="{ 'outline outline-2 outline-offset-2': i === current }"
+           class="cursor-pointer rounded mb-3">
         <p  *ngSwitchCase="'p'"  class="text-base">{{ element.text }}</p>
         <h1 *ngSwitchCase="'h1'" class="text-5xl"> {{ element.text }}</h1>
         <h2 *ngSwitchCase="'h2'" class="text-4xl"> {{ element.text }}</h2>
