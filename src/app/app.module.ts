@@ -1,5 +1,13 @@
-import { NgModule, isDevMode } from '@angular/core';
-import { BrowserModule } from '@angular/platform-browser';
+import * as Hammer from 'hammerjs';
+
+import {
+  BrowserModule,
+  HammerModule,
+  HammerGestureConfig,
+  HAMMER_GESTURE_CONFIG
+} from '@angular/platform-browser';
+
+import { NgModule, isDevMode, Injectable, importProvidersFrom } from '@angular/core';
 import { HttpClientModule } from '@angular/common/http';
 import { ServiceWorkerModule } from '@angular/service-worker';
 
@@ -7,6 +15,13 @@ import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 import { QrScannerComponent } from './views/qr-scanner/qr-scanner.component';
 import { ReaderComponent } from './views/reader/reader.component';
+
+@Injectable()
+export class MyHammerConfig extends HammerGestureConfig {
+  override overrides = <any> {
+    swipe: { direction: Hammer.DIRECTION_ALL },
+  };
+}
 
 @NgModule({
   declarations: [
@@ -25,7 +40,10 @@ import { ReaderComponent } from './views/reader/reader.component';
       registrationStrategy: 'registerWhenStable:30000'
     })
   ],
-  providers: [],
+  providers: [
+    importProvidersFrom(HammerModule),
+    { provide: HAMMER_GESTURE_CONFIG, useClass: MyHammerConfig }
+  ],
   bootstrap: [AppComponent]
 })
 export class AppModule { }
