@@ -30,14 +30,20 @@ export class ReaderComponent implements OnInit {
 
   public set(index: number) {
     this.current = index;
+    document.getElementById('' + index)!
+      .scrollIntoView({
+        behavior: "smooth",
+        inline: "nearest",
+        block: "end",
+    });
   }
 
   public next() {
-    this.current = Math.min(this.current + 1, this.guide.length - 1);
+    this.set(Math.min(this.current + 1, this.guide.length - 1));
   }
 
   public prev() {
-    this.current = Math.max(this.current - 1, 0);
+    this.set(Math.max(this.current - 1, 0));
   }
 
   public speak() {
