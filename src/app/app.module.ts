@@ -7,7 +7,7 @@ import {
   HAMMER_GESTURE_CONFIG
 } from '@angular/platform-browser';
 
-import { NgModule, isDevMode, Injectable, importProvidersFrom } from '@angular/core';
+import { NgModule, isDevMode, importProvidersFrom, Injectable } from '@angular/core';
 import { HttpClientModule } from '@angular/common/http';
 import { ServiceWorkerModule } from '@angular/service-worker';
 
@@ -19,7 +19,7 @@ import { ReaderComponent } from './views/reader/reader.component';
 @Injectable()
 export class MyHammerConfig extends HammerGestureConfig {
   override overrides = <any> {
-    swipe: { direction: Hammer.DIRECTION_ALL },
+    swipe: { direction: Hammer.DIRECTION_HORIZONTAL },
   };
 }
 
