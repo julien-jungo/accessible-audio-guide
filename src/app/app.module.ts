@@ -7,7 +7,7 @@ import {
   HAMMER_GESTURE_CONFIG
 } from '@angular/platform-browser';
 
-import {NgModule, isDevMode, importProvidersFrom, Injectable, ErrorHandler} from '@angular/core';
+import { NgModule, isDevMode, importProvidersFrom, Injectable, ErrorHandler } from '@angular/core';
 import { HttpClientModule } from '@angular/common/http';
 import { ServiceWorkerModule } from '@angular/service-worker';
 
@@ -17,6 +17,7 @@ import { QrScannerComponent } from './views/qr-scanner/qr-scanner.component';
 import { ReaderComponent } from './views/reader/reader.component';
 import { ErrorComponent } from './views/error/error.component';
 import { MyErrorHandler } from "./handlers/my-error-handler";
+import { ContainerComponent } from './components/container/container.component';
 
 @Injectable()
 export class MyHammerConfig extends HammerGestureConfig {
@@ -30,7 +31,8 @@ export class MyHammerConfig extends HammerGestureConfig {
     AppComponent,
     QrScannerComponent,
     ReaderComponent,
-    ErrorComponent
+    ErrorComponent,
+    ContainerComponent
   ],
   imports: [
     BrowserModule,
