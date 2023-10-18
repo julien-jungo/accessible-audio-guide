@@ -26,7 +26,12 @@ export class QrScannerComponent implements AfterViewInit {
       element: this.video!.nativeElement,
       onResult: (result, destroy) => {
         if (this.ready && result !== '') {
-          this.router.navigateByUrl(result).then(destroy);
+          // @ts-ignore - see https://shorturl.at/fmJV5
+          const queryParams = Object.fromEntries(new URLSearchParams(result));
+
+          this.router
+            .navigate(['/reader'], { queryParams })
+            .finally(destroy);
         }
       },
       onStartup: () => {
