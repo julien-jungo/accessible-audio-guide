@@ -18,8 +18,13 @@ export class ContentService {
   constructor(private readonly http: HttpClient) {}
 
   public request(url: string): Observable<Array<Element>> {
-    return this.http.get(url, { responseType: 'text' })
-        .pipe(map(content => this.parse(content)));
+    return this.http
+      .get(url, {
+        responseType: 'text',
+        // necessary if using ngrok for content
+        headers: { 'ngrok-skip-browser-warning': 'true' }
+      })
+      .pipe(map(content => this.parse(content)));
   }
 
   private parse(text: string): Array<Element> {
