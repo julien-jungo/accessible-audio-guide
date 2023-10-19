@@ -26,8 +26,9 @@ export class QrScannerComponent implements AfterViewInit {
       element: this.video!.nativeElement,
       onResult: (result, destroy) => {
         if (this.ready && result !== '') {
+          const url = new URL(result);
           // @ts-ignore - see https://shorturl.at/fmJV5
-          const queryParams = Object.fromEntries(new URLSearchParams(result));
+          const queryParams = Object.fromEntries(url.searchParams);
 
           this.router
             .navigate(['/reader'], { queryParams })
