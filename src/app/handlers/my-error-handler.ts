@@ -7,6 +7,7 @@ export class MyErrorHandler implements ErrorHandler {
   constructor(private readonly router: Router) {}
 
   public handleError(error: Error) {
-    void this.router.navigateByUrl('/error');
+    this.router.navigateByUrl('/error')
+      .finally(() => console.error(error));
   }
 }

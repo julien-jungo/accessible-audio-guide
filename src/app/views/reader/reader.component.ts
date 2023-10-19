@@ -11,6 +11,7 @@ import { ContentService, Element } from "../../services/content.service";
 export class ReaderComponent implements OnInit, AfterViewChecked {
 
   public ready: boolean = false;
+  public activated: boolean = false;
 
   public guide!: Array<Element>;
 
@@ -46,7 +47,6 @@ export class ReaderComponent implements OnInit, AfterViewChecked {
       .subscribe(guide => {
         this.guide = guide;
         this.ready = true;
-        this.speak();
       });
   }
 
@@ -65,6 +65,7 @@ export class ReaderComponent implements OnInit, AfterViewChecked {
   }
 
   private setAndScroll(index: number) {
+    this.activated = true;
     this.curr = index;
     this.scroll({
       behavior: 'smooth',
