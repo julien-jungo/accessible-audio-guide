@@ -23,6 +23,10 @@ import { ContainerComponent } from './components/container/container.component';
 export class MyHammerConfig extends HammerGestureConfig {
   override overrides = <any> {
     swipe: { direction: Hammer.DIRECTION_HORIZONTAL },
+    // necessary for vertical scrolling
+    // see https://shorturl.at/qvzPW
+    pinch: { enable: false },
+    rotate: { enable: false },
   };
 }
 
