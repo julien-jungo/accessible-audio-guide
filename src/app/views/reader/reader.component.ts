@@ -1,5 +1,6 @@
 import { OnInit, AfterViewChecked, Component } from '@angular/core';
 import { ActivatedRoute } from "@angular/router";
+import { ViewportScroller } from "@angular/common";
 import { SpeechService } from "../../services/speech.service";
 import { ContentService, Element } from "../../services/content.service";
 
@@ -23,17 +24,9 @@ export class ReaderComponent implements OnInit, AfterViewChecked {
   constructor(
     private readonly contentService: ContentService,
     private readonly speechService: SpeechService,
+    private readonly scroller: ViewportScroller,
     private readonly route: ActivatedRoute,
   ) {}
-
-  public ngAfterViewChecked() {
-    if (this.ready) {
-      this.scroll({
-        behavior: 'auto',
-        block: 'start'
-      })
-    }
-  }
 
   public ngOnInit() {
     const params = this.route.snapshot.queryParamMap;
@@ -50,6 +43,10 @@ export class ReaderComponent implements OnInit, AfterViewChecked {
       });
   }
 
+  public ngAfterViewChecked() {
+    if (this.ready && !this.activated) this.scroll();
+  }
+
   private speak() {
     this.speechService.speak({
       text: this.guide[this.curr].text,
@@ -57,20 +54,14 @@ export class ReaderComponent implements OnInit, AfterViewChecked {
     })
   }
 
-  private scroll(options: ScrollIntoViewOptions) {
-    const id = '' + this.curr;
-    document
-      .getElementById(id)!
-      .scrollIntoView(options);
+  private scroll() {
+    this.scroller.scrollToAnchor('' + this.curr);
   }
 
   private setAndScroll(index: number) {
     this.activated = true;
     this.curr = index;
-    this.scroll({
-      behavior: 'smooth',
-      block: 'nearest'
-    });
+    this.scroll();
   }
 
   public setAndSpeak(index: number) {
