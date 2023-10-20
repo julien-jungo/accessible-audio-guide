@@ -1,7 +1,7 @@
-<app-container *ngIf="ready" (swipeleft)="activated && prevAndSpeak()" (swiperight)="activated && nextAndSpeak()">
+<app-container *ngIf="ready" (swipeleft)="onSwipeLeft()" (swiperight)="onSwipeRight()">
   <ng-container *ngFor="let element of guide; index as i">
-    <div [ngSwitch]="element.tag" [id]="i" (tap)="setAndSpeak(i)"
-         [ngClass]="{ 'outline outline-2 outline-offset-2': activated && (i === curr) }"
+    <div [ngSwitch]="element.tag" [id]="i" (tap)="onTap(i)"
+         [ngClass]="{ 'outline outline-2 outline-offset-2': activated && (i === index.value) }"
          class="cursor-pointer mb-3">
       <p  *ngSwitchCase="'p'"  class="text-base">{{ element.text }}</p>
       <h1 *ngSwitchCase="'h1'" class="text-5xl"> {{ element.text }}</h1>

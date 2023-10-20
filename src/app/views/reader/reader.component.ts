@@ -1,23 +1,25 @@
-import { OnInit, AfterViewChecked, Component } from '@angular/core';
+import { Component, OnInit, AfterViewChecked, OnDestroy } from '@angular/core';
 import { ActivatedRoute } from "@angular/router";
 import { ViewportScroller } from "@angular/common";
 import { SpeechService } from "../../services/speech.service";
 import { ContentService, Element } from "../../services/content.service";
+import { BehaviorSubject, Subscription } from "rxjs";
 
 @Component({
   selector: 'app-reader',
   templateUrl: './reader.component.html',
   styleUrls: ['./reader.component.scss']
 })
-export class ReaderComponent implements OnInit, AfterViewChecked {
+export class ReaderComponent implements OnInit, AfterViewChecked, OnDestroy {
 
   public ready: boolean = false;
   public activated: boolean = false;
 
   public guide!: Array<Element>;
 
-  // query params
-  public curr!: number;
+  public index = new BehaviorSubject<number>(0);
+  private index$!: Subscription;
+
   private url!: string;
   private lang!: string;
 
@@ -33,7 +35,15 @@ export class ReaderComponent implements OnInit, AfterViewChecked {
 
     this.url = params.get('url')!;
     this.lang = params.get('lang')!;
-    this.curr = +params.get('index')!;
+    this.index.next(+params.get('index')!);
+
+    this.index$ = this.index
+      .subscribe(() => {
+        if (this.activated) {
+          this.scroll();
+          this.speak();
+        }
+      });
 
     this.contentService
       .request(this.url)
@@ -47,40 +57,41 @@ export class ReaderComponent implements OnInit, AfterViewChecked {
     if (this.ready && !this.activated) this.scroll();
   }
 
+  public ngOnDestroy() {
+    this.index$.unsubscribe();
+  }
+
   private speak() {
     this.speechService.speak({
-      text: this.guide[this.curr].text,
+      text: this.guide[this.index.value].text,
       lang: this.lang
     })
   }
 
   private scroll() {
-    this.scroller.scrollToAnchor('' + this.curr);
+    this.scroller.scrollToAnchor('' + this.index.value);
   }
 
-  private setAndScroll(index: number) {
+  public onTap(index: number) {
     this.activated = true;
-    this.curr = index;
-    this.scroll();
+    this.index.next(index);
   }
 
-  public setAndSpeak(index: number) {
-    this.setAndScroll(index);
-    this.speak();
+  public onSwipeRight() {
+    if (this.activated) {
+      const max = this.guide.length - 1;
+      const next = Math.min(
+        this.index.value + 1, max);
+      this.index.next(next);
+    }
   }
 
-  public nextAndSpeak() {
-    this.setAndSpeak(
-      Math.min(
-        this.curr + 1,
-        this.guide.length - 1)
-    );
-  }
-
-  public prevAndSpeak() {
-    this.setAndSpeak(
-      Math.max(
-        this.curr - 1, 0)
-    );
+  public onSwipeLeft() {
+    if (this.activated) {
+      const min = 0;
+      const next = Math.max(
+        this.index.value - 1, min);
+      this.index.next(next);
+    }
   }
 }
