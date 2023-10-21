@@ -1,6 +1,5 @@
 import { Component, OnInit, AfterViewChecked, OnDestroy } from '@angular/core';
 import { ActivatedRoute } from "@angular/router";
-import { ViewportScroller } from "@angular/common";
 import { SpeechService } from "../../services/speech.service";
 import { ContentService, Element } from "../../services/content.service";
 import { BehaviorSubject, Subscription } from "rxjs";
@@ -26,7 +25,6 @@ export class ReaderComponent implements OnInit, AfterViewChecked, OnDestroy {
   constructor(
     private readonly contentService: ContentService,
     private readonly speechService: SpeechService,
-    private readonly scroller: ViewportScroller,
     private readonly route: ActivatedRoute,
   ) {}
 
@@ -40,7 +38,10 @@ export class ReaderComponent implements OnInit, AfterViewChecked, OnDestroy {
     this.index$ = this.index
       .subscribe(() => {
         if (this.activated) {
-          this.scroll();
+          this.scroll({
+            behavior: 'smooth',
+            block: 'nearest'
+          });
           this.speak();
         }
       });
@@ -54,7 +55,12 @@ export class ReaderComponent implements OnInit, AfterViewChecked, OnDestroy {
   }
 
   public ngAfterViewChecked() {
-    if (this.ready && !this.activated) this.scroll();
+    if (this.ready && !this.activated) {
+      this.scroll({
+        behavior: 'auto',
+        block: 'start'
+      });
+    }
   }
 
   public ngOnDestroy() {
@@ -68,8 +74,11 @@ export class ReaderComponent implements OnInit, AfterViewChecked, OnDestroy {
     })
   }
 
-  private scroll() {
-    this.scroller.scrollToAnchor('' + this.index.value);
+  private scroll(options: ScrollIntoViewOptions) {
+    const id = '' + this.index.value;
+    document
+      .getElementById(id)!
+      .scrollIntoView(options);
   }
 
   public onTap(index: number) {
