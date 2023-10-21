@@ -1,7 +1,5 @@
 import { AfterViewInit, Component, ElementRef, ViewChild } from '@angular/core';
 import { ScannerService } from "../../services/scanner.service";
-import { ContentService } from "../../services/content.service";
-import { Router } from "@angular/router";
 
 @Component({
   selector: 'app-qr-scanner',
@@ -15,11 +13,7 @@ export class QrScannerComponent implements AfterViewInit {
 
   public ready: boolean = false;
 
-  constructor(
-    private readonly scannerService: ScannerService,
-    private readonly contentService: ContentService,
-    private readonly router: Router
-  ) {}
+  constructor(private readonly scannerService: ScannerService) {}
 
   ngAfterViewInit() {
     this.scannerService.scan({
@@ -27,12 +21,10 @@ export class QrScannerComponent implements AfterViewInit {
       onResult: (result, destroy) => {
         if (this.ready && result !== '') {
           const url = new URL(result);
-          // @ts-ignore - see https://shorturl.at/fmJV5
-          const queryParams = Object.fromEntries(url.searchParams);
-
-          this.router
-            .navigate(['/reader'], { queryParams })
-            .finally(destroy);
+          location.href = '/reader'
+            + url.search
+            + url.hash;
+          destroy();
         }
       },
       onStartup: () => {

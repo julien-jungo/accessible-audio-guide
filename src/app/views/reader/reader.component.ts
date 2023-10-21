@@ -1,4 +1,4 @@
-import { Component, OnInit, AfterViewChecked, OnDestroy } from '@angular/core';
+import { Component, OnInit, OnDestroy } from '@angular/core';
 import { ActivatedRoute } from "@angular/router";
 import { SpeechService } from "../../services/speech.service";
 import { ContentService, Element } from "../../services/content.service";
@@ -9,17 +9,17 @@ import { BehaviorSubject, Subscription } from "rxjs";
   templateUrl: './reader.component.html',
   styleUrls: ['./reader.component.scss']
 })
-export class ReaderComponent implements OnInit, AfterViewChecked, OnDestroy {
+export class ReaderComponent implements OnInit, OnDestroy {
 
   public ready: boolean = false;
   public activated: boolean = false;
 
-  public guide!: Array<Element>;
-
   public index = new BehaviorSubject<number>(0);
-  private index$!: Subscription;
 
-  private url!: string;
+  private subs: Subscription[] = [];
+
+  public guide!: Element[];
+
   private lang!: string;
 
   constructor(
@@ -29,42 +29,27 @@ export class ReaderComponent implements OnInit, AfterViewChecked, OnDestroy {
   ) {}
 
   public ngOnInit() {
-    const params = this.route.snapshot.queryParamMap;
+    const params = this.route.snapshot.queryParams;
 
-    this.url = params.get('url')!;
-    this.lang = params.get('lang')!;
-    this.index.next(+params.get('index')!);
+    this.lang = params['lang']!;
 
-    this.index$ = this.index
-      .subscribe(() => {
+    this.subs.push(
+      this.route.data.subscribe(data => {
+        this.guide = data['guide'];
+        this.ready = true;
+      }));
+
+    this.subs.push(
+      this.index.subscribe(() => {
         if (this.activated) {
-          this.scroll({
-            behavior: 'smooth',
-            block: 'nearest'
-          });
+          this.scroll();
           this.speak();
         }
-      });
-
-    this.contentService
-      .request(this.url)
-      .subscribe(guide => {
-        this.guide = guide;
-        this.ready = true;
-      });
-  }
-
-  public ngAfterViewChecked() {
-    if (this.ready && !this.activated) {
-      this.scroll({
-        behavior: 'auto',
-        block: 'start'
-      });
-    }
+      }));
   }
 
   public ngOnDestroy() {
-    this.index$.unsubscribe();
+    this.subs.forEach(sub => sub.unsubscribe());
   }
 
   private speak() {
@@ -74,11 +59,14 @@ export class ReaderComponent implements OnInit, AfterViewChecked, OnDestroy {
     })
   }
 
-  private scroll(options: ScrollIntoViewOptions) {
+  private scroll() {
     const id = '' + this.index.value;
     document
       .getElementById(id)!
-      .scrollIntoView(options);
+      .scrollIntoView({
+        behavior: 'smooth',
+        block: 'nearest'
+      });
   }
 
   public onTap(index: number) {

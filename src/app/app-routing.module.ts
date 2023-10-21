@@ -3,6 +3,7 @@ import { RouterModule, Routes } from '@angular/router';
 import { QrScannerComponent } from "./views/qr-scanner/qr-scanner.component";
 import { ReaderComponent } from "./views/reader/reader.component";
 import { ErrorComponent } from "./views/error/error.component";
+import { preloadResolver } from "./resolvers/preload.resolver";
 
 const routes: Routes = [
   {
@@ -11,7 +12,8 @@ const routes: Routes = [
   },
   {
     path: 'reader',
-    component: ReaderComponent
+    component: ReaderComponent,
+    resolve: { guide: preloadResolver }
   },
   {
     path: 'error',
@@ -25,7 +27,8 @@ const routes: Routes = [
 ];
 
 @NgModule({
-  imports: [RouterModule.forRoot(routes)],
+  imports: [RouterModule.forRoot(
+    routes, { anchorScrolling: 'enabled' })],
   exports: [RouterModule]
 })
 export class AppRoutingModule { }
