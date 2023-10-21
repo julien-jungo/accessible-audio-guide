@@ -1,4 +1,4 @@
-import { AfterViewInit, Component, ElementRef, ViewChild } from '@angular/core';
+import { AfterViewInit, Component, ElementRef, OnDestroy, ViewChild } from '@angular/core';
 import { ScannerService } from "../../services/scanner.service";
 
 @Component({
@@ -6,12 +6,14 @@ import { ScannerService } from "../../services/scanner.service";
   templateUrl: './qr-scanner.component.html',
   styleUrls: ['./qr-scanner.component.scss']
 })
-export class QrScannerComponent implements AfterViewInit {
+export class QrScannerComponent implements AfterViewInit, OnDestroy {
 
   @ViewChild('video')
   private video?: ElementRef;
 
   public ready: boolean = false;
+
+  private destroyScanner?: () => void;
 
   constructor(private readonly scannerService: ScannerService) {}
 
@@ -19,12 +21,12 @@ export class QrScannerComponent implements AfterViewInit {
     this.scannerService.scan({
       element: this.video!.nativeElement,
       onResult: (result, destroy) => {
+        this.destroyScanner = destroy;
         if (this.ready && result !== '') {
           const url = new URL(result);
           location.href = '/reader'
             + url.search
             + url.hash;
-          destroy();
         }
       },
       onStartup: () => {
@@ -34,5 +36,11 @@ export class QrScannerComponent implements AfterViewInit {
         }, 500);
       }
     });
+  }
+
+  ngOnDestroy() {
+    if (this.destroyScanner) {
+      this.destroyScanner();
+    }
   }
 }
