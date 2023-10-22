@@ -12,9 +12,8 @@ import { BehaviorSubject, Subscription } from "rxjs";
 export class ReaderComponent implements OnInit, OnDestroy {
 
   public ready: boolean = false;
-  public activated: boolean = false;
 
-  public index = new BehaviorSubject<number>(0);
+  public index = new BehaviorSubject<number | undefined>(undefined);
 
   private subs: Subscription[] = [];
 
@@ -40,8 +39,8 @@ export class ReaderComponent implements OnInit, OnDestroy {
       }));
 
     this.subs.push(
-      this.index.subscribe(() => {
-        if (this.activated) {
+      this.index.subscribe(_ => {
+        if (this.isAvailable()) {
           this.scroll();
           this.speak();
         }
@@ -52,15 +51,19 @@ export class ReaderComponent implements OnInit, OnDestroy {
     this.subs.forEach(sub => sub.unsubscribe());
   }
 
+  public isAvailable() {
+    return this.index.value !== undefined;
+  }
+
   private speak() {
     this.speechService.speak({
-      text: this.guide[this.index.value].text,
+      text: this.guide[this.index.value!].text,
       lang: this.lang
     })
   }
 
   private scroll() {
-    const id = '' + this.index.value;
+    const id = `${this.index.value}`;
     document
       .getElementById(id)!
       .scrollIntoView({
@@ -70,24 +73,23 @@ export class ReaderComponent implements OnInit, OnDestroy {
   }
 
   public onTap(index: number) {
-    this.activated = true;
     this.index.next(index);
   }
 
   public onSwipeRight() {
-    if (this.activated) {
+    if (this.isAvailable()) {
       const max = this.guide.length - 1;
       const next = Math.min(
-        this.index.value + 1, max);
+        this.index.value! + 1, max);
       this.index.next(next);
     }
   }
 
   public onSwipeLeft() {
-    if (this.activated) {
+    if (this.isAvailable()) {
       const min = 0;
       const next = Math.max(
-        this.index.value - 1, min);
+        this.index.value! - 1, min);
       this.index.next(next);
     }
   }
