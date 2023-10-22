@@ -19,6 +19,7 @@ export class ReaderComponent implements OnInit, OnDestroy {
 
   public guide!: Element[];
 
+  private audio!: boolean;
   private lang!: string;
 
   constructor(
@@ -30,6 +31,7 @@ export class ReaderComponent implements OnInit, OnDestroy {
   public ngOnInit() {
     const params = this.route.snapshot.queryParams;
 
+    this.audio = params['audio'] === 'on';
     this.lang = params['lang']!;
 
     this.subs.push(
@@ -73,7 +75,7 @@ export class ReaderComponent implements OnInit, OnDestroy {
   }
 
   public onTap(index: number) {
-    this.index.next(index);
+    this.audio && this.index.next(index);
   }
 
   public onSwipeRight() {
