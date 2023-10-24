@@ -1,0 +1,83 @@
+{
+  "configVersion": 1,
+  "timestamp": 1698147755913,
+  "index": "/accessible-audio-guide/index.html",
+  "assetGroups": [
+    {
+      "name": "app",
+      "installMode": "prefetch",
+      "updateMode": "prefetch",
+      "cacheQueryOptions": {
+        "ignoreVary": true
+      },
+      "urls": [
+        "/accessible-audio-guide/920.e8d23bf976f65f02.js",
+        "/accessible-audio-guide/favicon.ico",
+        "/accessible-audio-guide/index.html",
+        "/accessible-audio-guide/main.915f6c70aa9705eb.js",
+        "/accessible-audio-guide/manifest.webmanifest",
+        "/accessible-audio-guide/polyfills.a113f501661ea88d.js",
+        "/accessible-audio-guide/runtime.6ef2d015e0c3d4ba.js",
+        "/accessible-audio-guide/styles.2c83f432c06d83b9.css"
+      ],
+      "patterns": []
+    },
+    {
+      "name": "assets",
+      "installMode": "lazy",
+      "updateMode": "prefetch",
+      "cacheQueryOptions": {
+        "ignoreVary": true
+      },
+      "urls": [
+        "/accessible-audio-guide/assets/icons/icon-128x128.png",
+        "/accessible-audio-guide/assets/icons/icon-144x144.png",
+        "/accessible-audio-guide/assets/icons/icon-152x152.png",
+        "/accessible-audio-guide/assets/icons/icon-192x192.png",
+        "/accessible-audio-guide/assets/icons/icon-384x384.png",
+        "/accessible-audio-guide/assets/icons/icon-512x512.png",
+        "/accessible-audio-guide/assets/icons/icon-72x72.png",
+        "/accessible-audio-guide/assets/icons/icon-96x96.png"
+      ],
+      "patterns": []
+    }
+  ],
+  "dataGroups": [],
+  "hashTable": {
+    "/accessible-audio-guide/920.e8d23bf976f65f02.js": "a47b0ba3493bfd9f2c7aa9091d9f1a0e58138396",
+    "/accessible-audio-guide/assets/icons/icon-128x128.png": "f336d395cfb9475b8f0a818e00c4ad7637a5858b",
+    "/accessible-audio-guide/assets/icons/icon-144x144.png": "ee2f9463e1fb3982f2f562c789f99dabc420f866",
+    "/accessible-audio-guide/assets/icons/icon-152x152.png": "c79198f984b68cbd2e9898a58790d7c1428d92ee",
+    "/accessible-audio-guide/assets/icons/icon-192x192.png": "046f00c2c279042906cdb2b5de0da79a97c8bce5",
+    "/accessible-audio-guide/assets/icons/icon-384x384.png": "38889fdd1425522963f0bbf9b0ea46fe55c23307",
+    "/accessible-audio-guide/assets/icons/icon-512x512.png": "809bd3fafbff55e198fbd4b8e11871554092bf0a",
+    "/accessible-audio-guide/assets/icons/icon-72x72.png": "2ea2e7d9e5a939f7de461f9ed663eb89d8cb9ea8",
+    "/accessible-audio-guide/assets/icons/icon-96x96.png": "af30624c73fc617469c7974555db282d14250402",
+    "/accessible-audio-guide/favicon.ico": "7c3d89245063872cfe0555569d8fc86c939d3667",
+    "/accessible-audio-guide/index.html": "a05b7d7ae7ec4507830d2f42a2641ab61e09353e",
+    "/accessible-audio-guide/main.915f6c70aa9705eb.js": "6e620b7d177567fea462ccd7a9f86d0ed488e34c",
+    "/accessible-audio-guide/manifest.webmanifest": "1eddd6fd3699c24214794e0b52b8e623a9b77de8",
+    "/accessible-audio-guide/polyfills.a113f501661ea88d.js": "8d73bc98ddfbbf0c249c826ac7bc0f82a9312149",
+    "/accessible-audio-guide/runtime.6ef2d015e0c3d4ba.js": "eaafa731c3866882b8f67c2073ef53c43f7b5bce",
+    "/accessible-audio-guide/styles.2c83f432c06d83b9.css": "604a42d76021759f85f3e47b171e5a35b4601e1d"
+  },
+  "navigationUrls": [
+    {
+      "positive": true,
+      "regex": "^\\/.*$"
+    },
+    {
+      "positive": false,
+      "regex": "^\\/(?:.+\\/)?[^/]*\\.[^/]*$"
+    },
+    {
+      "positive": false,
+      "regex": "^\\/(?:.+\\/)?[^/]*__[^/]*$"
+    },
+    {
+      "positive": false,
+      "regex": "^\\/(?:.+\\/)?[^/]*__[^/]*\\/.*$"
+    }
+  ],
+  "navigationRequestStrategy": "performance"
+}
