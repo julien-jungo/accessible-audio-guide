@@ -1,6 +1,6 @@
 {
   "configVersion": 1,
-  "timestamp": 1698149239651,
+  "timestamp": 1698331686652,
   "index": "/accessible-audio-guide/index.html",
   "assetGroups": [
     {
@@ -30,6 +30,7 @@
         "ignoreVary": true
       },
       "urls": [
+        "/accessible-audio-guide/assets/example.md",
         "/accessible-audio-guide/assets/icons/icon-128x128.png",
         "/accessible-audio-guide/assets/icons/icon-144x144.png",
         "/accessible-audio-guide/assets/icons/icon-152x152.png",
@@ -45,6 +46,7 @@
   "dataGroups": [],
   "hashTable": {
     "/accessible-audio-guide/920.e8d23bf976f65f02.js": "a47b0ba3493bfd9f2c7aa9091d9f1a0e58138396",
+    "/accessible-audio-guide/assets/example.md": "a96c9bd36536a12c78b28a462d9ef6171f017ad0",
     "/accessible-audio-guide/assets/icons/icon-128x128.png": "f336d395cfb9475b8f0a818e00c4ad7637a5858b",
     "/accessible-audio-guide/assets/icons/icon-144x144.png": "ee2f9463e1fb3982f2f562c789f99dabc420f866",
     "/accessible-audio-guide/assets/icons/icon-152x152.png": "c79198f984b68cbd2e9898a58790d7c1428d92ee",
