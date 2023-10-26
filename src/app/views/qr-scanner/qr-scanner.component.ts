@@ -15,6 +15,8 @@ export class QrScannerComponent implements AfterViewInit, OnDestroy {
 
   private destroyScanner?: () => void;
 
+  private context = '/accessible-audio-guide';
+
   constructor(private readonly scannerService: ScannerService) {}
 
   ngAfterViewInit() {
@@ -24,7 +26,7 @@ export class QrScannerComponent implements AfterViewInit, OnDestroy {
         this.destroyScanner = destroy;
         if (this.ready && result !== '') {
           const url = new URL(result);
-          location.href = '/reader'
+          location.href = `${this.context}/reader`
             + url.search
             + url.hash;
         }
