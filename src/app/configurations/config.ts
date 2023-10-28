@@ -1,3 +1,3 @@
-export default {
-  context: '/accessible-audio-guide',
+export const config = {
+  context: '',
 };
