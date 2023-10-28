@@ -22,7 +22,7 @@ export class ContentService {
       .get(url, {
         responseType: 'text',
         // necessary if using ngrok for content
-        headers: { 'ngrok-skip-browser-warning': 'true' }
+        // headers: { 'ngrok-skip-browser-warning': 'true' }
       })
       .pipe(map(content => this.parse(content)));
   }
