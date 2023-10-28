@@ -18,6 +18,7 @@ import { ReaderComponent } from './views/reader/reader.component';
 import { ErrorComponent } from './views/error/error.component';
 import { MyErrorHandler } from "./handlers/my-error-handler";
 import { ContainerComponent } from './components/container/container.component';
+import { QrButtonComponent } from './components/qr-button/qr-button.component';
 
 @Injectable()
 export class MyHammerConfig extends HammerGestureConfig {
@@ -36,7 +37,8 @@ export class MyHammerConfig extends HammerGestureConfig {
     QrScannerComponent,
     ReaderComponent,
     ErrorComponent,
-    ContainerComponent
+    ContainerComponent,
+    QrButtonComponent
   ],
   imports: [
     BrowserModule,
