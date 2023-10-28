@@ -1,5 +1,6 @@
 import { ErrorHandler, Injectable } from "@angular/core";
 import { Router } from "@angular/router";
+import { config } from "../configurations/config";
 
 @Injectable()
 export class MyErrorHandler implements ErrorHandler {
@@ -8,6 +9,10 @@ export class MyErrorHandler implements ErrorHandler {
 
   public handleError(error: Error) {
     this.router.navigateByUrl('/error')
-      .finally(() => console.error(error));
+      .finally(() => {
+        if (config.mode === 'dev') {
+          console.error(error);
+        }
+      });
   }
 }
