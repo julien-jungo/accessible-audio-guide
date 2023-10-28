@@ -1,5 +1,6 @@
 import { AfterViewInit, Component, ElementRef, OnDestroy, ViewChild } from '@angular/core';
 import { ScannerService } from "../../services/scanner.service";
+import context from "../../configurations/config";
 
 @Component({
   selector: 'app-qr-scanner',
@@ -15,8 +16,6 @@ export class QrScannerComponent implements AfterViewInit, OnDestroy {
 
   private destroyScanner?: () => void;
 
-  private context = '/accessible-audio-guide';
-
   constructor(private readonly scannerService: ScannerService) {}
 
   ngAfterViewInit() {
@@ -26,7 +25,8 @@ export class QrScannerComponent implements AfterViewInit, OnDestroy {
         this.destroyScanner = destroy;
         if (this.ready && result !== '') {
           const url = new URL(result);
-          location.href = `${this.context}/reader`
+          location.href = context
+            + '/reader'
             + url.search
             + url.hash;
         }
