@@ -10,7 +10,7 @@ export class MyErrorHandler implements ErrorHandler {
   public handleError(error: Error) {
     this.router.navigateByUrl('/error')
       .finally(() => {
-        if (config.mode === 'dev') {
+        if (!config.isProd) {
           console.error(error);
         }
       });
