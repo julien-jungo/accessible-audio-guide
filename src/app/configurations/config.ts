@@ -1,4 +1,4 @@
-const isProd = false;
+const isProd = true;
 
 const prodContext = '/accessible-audio-guide';
 const devContext = '';
