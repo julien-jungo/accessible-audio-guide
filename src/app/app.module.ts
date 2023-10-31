@@ -23,7 +23,7 @@ import { QrButtonComponent } from './components/qr-button/qr-button.component';
 @Injectable()
 export class MyHammerConfig extends HammerGestureConfig {
   override overrides = <any> {
-    swipe: { direction: Hammer.DIRECTION_HORIZONTAL },
+    swipe: { direction: Hammer.DIRECTION_ALL },
     // necessary for vertical scrolling
     // see https://shorturl.at/qvzPW
     pinch: { enable: false },

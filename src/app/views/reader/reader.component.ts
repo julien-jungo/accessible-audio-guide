@@ -78,7 +78,7 @@ export class ReaderComponent implements OnInit, OnDestroy {
     this.audio && this.index.next(index);
   }
 
-  public onSwipeRight() {
+  public onSwipeDown() {
     if (this.isAvailable()) {
       const max = this.guide.length - 1;
       const next = Math.min(
@@ -87,12 +87,63 @@ export class ReaderComponent implements OnInit, OnDestroy {
     }
   }
 
-  public onSwipeLeft() {
+  public onSwipeUp() {
     if (this.isAvailable()) {
       const min = 0;
       const next = Math.max(
         this.index.value! - 1, min);
       this.index.next(next);
     }
+  }
+
+  public onSwipeLeft() {
+    if (this.isAvailable()) {
+      const index = this.index.value!
+      const current = this.guide.at(index)!;
+
+      for (let i = index - 1; i > 0; i--) {
+        const prev = this.guide.at(i)!;
+        const comp = this.compareLevel(
+          current.tag, prev.tag);
+
+        if (comp === 0) this.index.next(i);
+        if (comp >= 0) return;
+      }
+    }
+  }
+
+  public onSwipeRight() {
+    if (this.isAvailable()) {
+      const index = this.index.value!
+      const current = this.guide.at(index)!;
+
+      for (let i = index + 1; i < this.guide.length; i++) {
+        const next = this.guide.at(i)!;
+        const comp = this.compareLevel(
+          current.tag, next.tag);
+
+        if (comp === 0) this.index.next(i);
+        if (comp >= 0) return;
+      }
+    }
+  }
+
+  private compareLevel(a: string, b: string) {
+    const levelA = this.getLevel(a);
+    const levelB = this.getLevel(b);
+
+    return levelA && levelB
+      ? levelA - levelB
+      : levelA
+        ? -1
+        : levelB
+          ? 1
+          : 0;
+  }
+
+  private getLevel(tag: string) {
+    return tag.charAt(0) === 'h'
+      ? +tag.charAt(1)
+      : undefined;
   }
 }
