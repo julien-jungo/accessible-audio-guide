@@ -80,50 +80,76 @@ export class ReaderComponent implements OnInit, OnDestroy {
 
   public onSwipeDown() {
     if (this.isAvailable()) {
-      const max = this.guide.length - 1;
-      const next = Math.min(
-        this.index.value! + 1, max);
-      this.index.next(next);
+      const index = this.index.value!;
+      const current = this.guide.at(index)!;
+
+      for (let i = index + 1; i < this.guide.length; i++) {
+        const cmp = this.compareLevel(
+          current.tag, this.guide.at(i)!.tag);
+
+        if (cmp === 0) {
+          this.index.next(i);
+          return;
+        } else if (cmp > 0) {
+          return;
+        }
+      }
     }
   }
 
   public onSwipeUp() {
     if (this.isAvailable()) {
-      const min = 0;
-      const next = Math.max(
-        this.index.value! - 1, min);
-      this.index.next(next);
+      const index = this.index.value!;
+      const current = this.guide.at(index)!;
+
+      for (let i = index - 1; i >= 0; i--) {
+        const cmp = this.compareLevel(
+          current.tag, this.guide.at(i)!.tag);
+
+        if (cmp === 0) {
+          this.index.next(i);
+          return;
+        } else if (cmp > 0) {
+          return;
+        }
+      }
     }
   }
 
   public onSwipeLeft() {
     if (this.isAvailable()) {
-      const index = this.index.value!
+      const index = this.index.value!;
       const current = this.guide.at(index)!;
 
-      for (let i = index - 1; i > 0; i--) {
-        const prev = this.guide.at(i)!;
-        const comp = this.compareLevel(
-          current.tag, prev.tag);
+      for (let i = index - 1; i >= 0; i--) {
+        const cmp = this.compareLevel(
+          current.tag, this.guide.at(i)!.tag);
 
-        if (comp === 0) this.index.next(i);
-        if (comp >= 0) return;
+        if (cmp > 0) {
+          this.index.next(i);
+          return;
+        } else {
+          continue;
+        }
       }
     }
   }
 
   public onSwipeRight() {
     if (this.isAvailable()) {
-      const index = this.index.value!
+      const index = this.index.value!;
       const current = this.guide.at(index)!;
 
       for (let i = index + 1; i < this.guide.length; i++) {
-        const next = this.guide.at(i)!;
-        const comp = this.compareLevel(
-          current.tag, next.tag);
+        const cmp = this.compareLevel(
+          current.tag, this.guide.at(i)!.tag);
 
-        if (comp === 0) this.index.next(i);
-        if (comp >= 0) return;
+        if (cmp < 0) {
+          this.index.next(i);
+          return;
+        } else {
+          break;
+        }
       }
     }
   }
