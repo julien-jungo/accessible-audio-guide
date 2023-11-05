@@ -1,4 +1,6 @@
-<app-container *ngIf="ready" (swipeleft)="onSwipeLeft()" (swiperight)="onSwipeRight()">
+<app-container *ngIf="ready"
+               (swipeleft)="onSwipeLeft()" (swiperight)="onSwipeRight()"
+               (swipedown)="onSwipeDown()" (swipeup)="onSwipeUp()">
   <ng-container *ngFor="let element of guide; index as i">
     <div [ngSwitch]="element.tag" [id]="i" (tap)="onTap(i)"
          [ngClass]="{ 'outline outline-2 outline-offset-2': isAvailable() && (i === index.value) }"

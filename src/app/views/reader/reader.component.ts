@@ -70,7 +70,7 @@ export class ReaderComponent implements OnInit, OnDestroy {
       .getElementById(id)!
       .scrollIntoView({
         behavior: 'smooth',
-        block: 'nearest'
+        block: 'start'
       });
   }
 
@@ -93,6 +93,24 @@ export class ReaderComponent implements OnInit, OnDestroy {
       const next = Math.max(
         this.index.value! - 1, min);
       this.index.next(next);
+    }
+  }
+
+  public onSwipeUp() {
+    if (this.isAvailable()) {
+      const max = Math.max(this.index.value!, 0)
+      const segment = this.guide.slice(0, max).reverse();
+      const prev = segment.find(el => el.tag.charAt(0) === 'h');
+      if (prev) this.index.next(this.guide.indexOf(prev));
+    }
+  }
+
+  public onSwipeDown() {
+    if (this.isAvailable()) {
+      const min = Math.min(this.index.value! + 1, this.guide.length);
+      const segment = this.guide.slice(min, this.guide.length);
+      const next = segment.find(el => el.tag.charAt(0) === 'h');
+      if (next) this.index.next(this.guide.indexOf(next));
     }
   }
 }
