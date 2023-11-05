@@ -70,7 +70,7 @@ export class ReaderComponent implements OnInit, OnDestroy {
       .getElementById(id)!
       .scrollIntoView({
         behavior: 'smooth',
-        block: 'nearest'
+        block: 'start'
       });
   }
 
