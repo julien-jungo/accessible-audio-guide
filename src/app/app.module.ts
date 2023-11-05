@@ -17,9 +17,12 @@ import { QrScannerComponent } from './views/qr-scanner/qr-scanner.component';
 import { ReaderComponent } from './views/reader/reader.component';
 import { ErrorComponent } from './views/error/error.component';
 import { MyErrorHandler } from "./handlers/my-error-handler";
-import { ContainerComponent } from './components/container/container.component';
-import { QrButtonComponent } from './components/qr-button/qr-button.component';
 import { HomeComponent } from './views/home/home.component';
+import { LayoutComponent } from './components/layout/layout.component';
+import { MenuComponent } from './components/menu/menu.component';
+import { HomeIconComponent } from './components/icons/home-icon/home-icon.component';
+import { InfoIconComponent } from './components/icons/info-icon/info-icon.component';
+import { QrIconComponent } from './components/icons/qr-icon/qr-icon.component';
 
 @Injectable()
 export class MyHammerConfig extends HammerGestureConfig {
@@ -38,9 +41,12 @@ export class MyHammerConfig extends HammerGestureConfig {
     QrScannerComponent,
     ReaderComponent,
     ErrorComponent,
-    ContainerComponent,
-    QrButtonComponent,
-    HomeComponent
+    HomeComponent,
+    LayoutComponent,
+    MenuComponent,
+    HomeIconComponent,
+    InfoIconComponent,
+    QrIconComponent
   ],
   imports: [
     BrowserModule,

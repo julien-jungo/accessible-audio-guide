@@ -1,4 +1,4 @@
-<app-container *ngIf="ready" (swipeleft)="onSwipeLeft()" (swiperight)="onSwipeRight()">
+<app-layout *ngIf="ready" (swipeleft)="onSwipeLeft()" (swiperight)="onSwipeRight()">
   <ng-container *ngFor="let element of guide; index as i">
     <div [ngSwitch]="element.tag" [id]="i" (tap)="onTap(i)"
          [ngClass]="{ 'outline outline-2 outline-offset-2': isAvailable() && (i === index.value) }"
@@ -12,5 +12,4 @@
       <h6 *ngSwitchCase="'h6'" class="text-lg">  {{ element.text }}</h6>
     </div>
   </ng-container>
-  <app-qr-button/>
-</app-container>
+</app-layout>
