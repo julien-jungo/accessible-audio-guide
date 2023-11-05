@@ -7,4 +7,8 @@ import { Component } from '@angular/core';
 })
 export class MenuComponent {
   hidden: boolean = true;
+
+  toggleHidden() {
+    this.hidden = !this.hidden;
+  }
 }

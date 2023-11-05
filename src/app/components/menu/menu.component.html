@@ -1,4 +1,5 @@
-<div class="flex justify-around bg-black text-white w-100 py-2">
+<app-info [hidden]="hidden"/>
+<div class="flex justify-around bg-black text-white py-2">
   <a [routerLink]="'/'">
     <app-home-icon
       [width]="'w-14'"
@@ -9,7 +10,7 @@
       [width]="'w-14'"
       [height]="'h-14'"/>
   </a>
-  <button>
+  <button (click)="toggleHidden()">
     <app-info-icon
       [width]="'w-14'"
       [height]="'h-14'"/>
