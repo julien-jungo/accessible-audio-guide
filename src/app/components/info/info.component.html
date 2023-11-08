@@ -5,7 +5,7 @@
         <app-click-icon [width]="'w-6'" [height]="'h-6'"/>
         <span class="font-bold">Klicken</span>
       </div>
-      Zu beliebigem Text wechseln
+      {{ textClick }}
     </li>
     <hr>
     <li>
@@ -13,7 +13,7 @@
         <app-arrow-left-icon [width]="'w-6'" [height]="'h-6'"/>
         <span class="font-bold">Nach links streichen</span>
       </div>
-      Zum vorherigen Text gleicher Ebene
+      {{ textLeft }}
     </li>
     <hr>
     <li>
@@ -21,7 +21,7 @@
         <app-arrow-right-icon [width]="'w-6'" [height]="'h-6'"/>
         <span class="font-bold">Nach rechts streichen</span>
       </div>
-      Zum nächsten Text gleicher Ebene
+      {{ textRight }}
     </li>
     <hr>
     <li>
@@ -29,7 +29,7 @@
         <app-arrow-up-icon [width]="'w-6'" [height]="'h-6'"/>
         <span class="font-bold">Nach oben streichen</span>
       </div>
-      Eine Ebene im Text aufsteigen
+      {{ textUp }}
     </li>
     <hr>
     <li>
@@ -37,7 +37,7 @@
         <app-arrow-down-icon [width]="'w-6'" [height]="'h-6'"/>
         <span class="font-bold">Nach unten streichen</span>
       </div>
-      Eine Ebene im Text absteigen
+      {{ textDown }}
     </li>
   </ul>
 </div>

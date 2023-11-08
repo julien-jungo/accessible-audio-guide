@@ -3,6 +3,7 @@ import { ActivatedRoute } from "@angular/router";
 import { SpeechService } from "../../services/speech.service";
 import { ContentService, Element } from "../../services/content.service";
 import { BehaviorSubject, Subscription } from "rxjs";
+import { config } from '../../configurations/config';
 
 @Component({
   selector: 'app-reader',
@@ -79,16 +80,59 @@ export class ReaderComponent implements OnInit, OnDestroy {
   }
 
   public onSwipeDown() {
-    // V1
-    /*
+    switch (config.variant) {
+      case 'V1':
+        return this.onSwipeDownV1();
+      case 'V2':
+        return this.onSwipeDownV2();
+      default:
+        throw new Error('No variant is set');
+    }
+  }
+
+  public onSwipeUp() {
+    switch (config.variant) {
+      case 'V1':
+        return this.onSwipeUpV1();
+      case 'V2':
+        return this.onSwipeUpV2();
+      default:
+        throw new Error('No variant is set');
+    }
+  }
+
+  public onSwipeRight() {
+    switch (config.variant) {
+      case 'V1':
+        return this.onSwipeRightV1();
+      case 'V2':
+        return this.onSwipeRightV2();
+      default:
+        throw new Error('No variant is set');
+    }
+  }
+
+  public onSwipeLeft() {
+    switch (config.variant) {
+      case 'V1':
+        return this.onSwipeLeftV1();
+      case 'V2':
+        return this.onSwipeLeftV2();
+      default:
+        throw new Error('No variant is set');
+    }
+  }
+
+  private onSwipeDownV1() {
     if (this.isAvailable()) {
       const min = Math.min(this.index.value! + 1, this.guide.length);
       const segment = this.guide.slice(min, this.guide.length);
       const next = segment.find(el => el.tag.charAt(0) === 'h');
       if (next) this.index.next(this.guide.indexOf(next));
     }
-     */
-    // V2
+  }
+
+  private onSwipeDownV2() {
     if (this.isAvailable()) {
       const index = this.index.value!;
       const current = this.guide.at(index)!;
@@ -107,17 +151,16 @@ export class ReaderComponent implements OnInit, OnDestroy {
     }
   }
 
-  public onSwipeUp() {
-    // V1
-    /*
+  private onSwipeUpV1() {
     if (this.isAvailable()) {
       const max = Math.max(this.index.value!, 0)
       const segment = this.guide.slice(0, max).reverse();
       const prev = segment.find(el => el.tag.charAt(0) === 'h');
       if (prev) this.index.next(this.guide.indexOf(prev));
     }
-     */
-    // V2
+  }
+
+  private onSwipeUpV2() {
     if (this.isAvailable()) {
       const index = this.index.value!;
       const current = this.guide.at(index)!;
@@ -136,17 +179,16 @@ export class ReaderComponent implements OnInit, OnDestroy {
     }
   }
 
-  public onSwipeRight() {
-    /*
-    // V1
+  private onSwipeRightV1() {
     if (this.isAvailable()) {
       const max = this.guide.length - 1;
       const next = Math.min(
         this.index.value! + 1, max);
       this.index.next(next);
     }
-     */
-    // V2
+  }
+
+  private onSwipeRightV2() {
     if (this.isAvailable()) {
       const index = this.index.value!;
       const current = this.guide.at(index)!;
@@ -165,17 +207,16 @@ export class ReaderComponent implements OnInit, OnDestroy {
     }
   }
 
-  public onSwipeLeft() {
-    /*
-    // V1
+  private onSwipeLeftV1() {
     if (this.isAvailable()) {
       const min = 0;
       const next = Math.max(
         this.index.value! - 1, min);
       this.index.next(next);
     }
-     */
-    // V2
+  }
+
+  private onSwipeLeftV2() {
     if (this.isAvailable()) {
       const index = this.index.value!;
       const current = this.guide.at(index)!;
