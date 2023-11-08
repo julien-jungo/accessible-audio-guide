@@ -17,8 +17,18 @@ import { QrScannerComponent } from './views/qr-scanner/qr-scanner.component';
 import { ReaderComponent } from './views/reader/reader.component';
 import { ErrorComponent } from './views/error/error.component';
 import { MyErrorHandler } from "./handlers/my-error-handler";
-import { ContainerComponent } from './components/container/container.component';
-import { QrButtonComponent } from './components/qr-button/qr-button.component';
+import { HomeComponent } from './views/home/home.component';
+import { LayoutComponent } from './components/layout/layout.component';
+import { MenuComponent } from './components/menu/menu.component';
+import { HomeIconComponent } from './components/icons/home-icon/home-icon.component';
+import { InfoIconComponent } from './components/icons/info-icon/info-icon.component';
+import { QrIconComponent } from './components/icons/qr-icon/qr-icon.component';
+import { ClickIconComponent } from './components/icons/click-icon/click-icon.component';
+import { ArrowLeftIconComponent } from './components/icons/arrow-left-icon/arrow-left-icon.component';
+import { ArrowRightIconComponent } from './components/icons/arrow-right-icon/arrow-right-icon.component';
+import { ArrowDownIconComponent } from './components/icons/arrow-down-icon/arrow-down-icon.component';
+import { ArrowUpIconComponent } from './components/icons/arrow-up-icon/arrow-up-icon.component';
+import { InfoComponent } from './components/info/info.component';
 
 @Injectable()
 export class MyHammerConfig extends HammerGestureConfig {
@@ -37,8 +47,18 @@ export class MyHammerConfig extends HammerGestureConfig {
     QrScannerComponent,
     ReaderComponent,
     ErrorComponent,
-    ContainerComponent,
-    QrButtonComponent
+    HomeComponent,
+    LayoutComponent,
+    MenuComponent,
+    HomeIconComponent,
+    InfoIconComponent,
+    QrIconComponent,
+    ClickIconComponent,
+    ArrowLeftIconComponent,
+    ArrowRightIconComponent,
+    ArrowDownIconComponent,
+    ArrowUpIconComponent,
+    InfoComponent
   ],
   imports: [
     BrowserModule,

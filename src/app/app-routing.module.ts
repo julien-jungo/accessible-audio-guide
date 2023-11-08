@@ -4,10 +4,15 @@ import { QrScannerComponent } from "./views/qr-scanner/qr-scanner.component";
 import { ReaderComponent } from "./views/reader/reader.component";
 import { ErrorComponent } from "./views/error/error.component";
 import { preloadResolver } from "./resolvers/preload.resolver";
+import { HomeComponent } from "./views/home/home.component";
 
 const routes: Routes = [
   {
     path: '',
+    component: HomeComponent
+  },
+  {
+    path: 'scanner',
     component: QrScannerComponent
   },
   {
