@@ -87,36 +87,17 @@ export class ReaderComponent implements OnInit, OnDestroy {
         const cmp = this.compareLevel(
           current.tag, this.guide.at(i)!.tag);
 
-        if (cmp === 0) {
+        if (cmp < 0) {
           this.index.next(i);
           return;
-        } else if (cmp > 0) {
-          return;
+        } else {
+          break;
         }
       }
     }
   }
 
   public onSwipeUp() {
-    if (this.isAvailable()) {
-      const index = this.index.value!;
-      const current = this.guide.at(index)!;
-
-      for (let i = index - 1; i >= 0; i--) {
-        const cmp = this.compareLevel(
-          current.tag, this.guide.at(i)!.tag);
-
-        if (cmp === 0) {
-          this.index.next(i);
-          return;
-        } else if (cmp > 0) {
-          return;
-        }
-      }
-    }
-  }
-
-  public onSwipeLeft() {
     if (this.isAvailable()) {
       const index = this.index.value!;
       const current = this.guide.at(index)!;
@@ -135,6 +116,25 @@ export class ReaderComponent implements OnInit, OnDestroy {
     }
   }
 
+  public onSwipeLeft() {
+    if (this.isAvailable()) {
+      const index = this.index.value!;
+      const current = this.guide.at(index)!;
+
+      for (let i = index - 1; i >= 0; i--) {
+        const cmp = this.compareLevel(
+          current.tag, this.guide.at(i)!.tag);
+
+        if (cmp === 0) {
+          this.index.next(i);
+          return;
+        } else if (cmp > 0) {
+          return;
+        }
+      }
+    }
+  }
+
   public onSwipeRight() {
     if (this.isAvailable()) {
       const index = this.index.value!;
@@ -144,11 +144,11 @@ export class ReaderComponent implements OnInit, OnDestroy {
         const cmp = this.compareLevel(
           current.tag, this.guide.at(i)!.tag);
 
-        if (cmp < 0) {
+        if (cmp === 0) {
           this.index.next(i);
           return;
-        } else {
-          break;
+        } else if (cmp > 0) {
+          return;
         }
       }
     }
