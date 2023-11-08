@@ -1,0 +1,18 @@
+<app-info [hidden]="hidden"/>
+<div class="flex justify-around bg-black text-white py-2">
+  <a [routerLink]="'/'">
+    <app-home-icon
+      [width]="'w-14'"
+      [height]="'h-14'"/>
+  </a>
+  <a [routerLink]="'/scanner'">
+    <app-qr-icon
+      [width]="'w-14'"
+      [height]="'h-14'"/>
+  </a>
+  <button (click)="toggleHidden()">
+    <app-info-icon
+      [width]="'w-14'"
+      [height]="'h-14'"/>
+  </button>
+</div>
