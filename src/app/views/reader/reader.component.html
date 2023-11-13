@@ -2,9 +2,9 @@
             (swipeup)="onSwipeUp()" (swipedown)="onSwipeDown()"
             (swipeleft)="onSwipeLeft()" (swiperight)="onSwipeRight()">
   <ng-container *ngFor="let element of guide; index as i">
-    <div [ngSwitch]="element.tag" [id]="i" (tap)="onTap(i)"
+    <div [ngSwitch]="element.tag" [id]="i" (click)="onClick(i)" (dblclick)="onDoubleClick(i)"
          [ngClass]="{ 'outline-dashed outline-2 outline-offset-2': isAvailable() && (i === index.value) }"
-         class="cursor-pointer mb-3">
+         class="cursor-pointer scroll-mt-2 mb-3">
       <p  *ngSwitchCase="'p'"  class="text-base">{{ element.text }}</p>
       <h1 *ngSwitchCase="'h1'" class="text-5xl"> {{ element.text }}</h1>
       <h2 *ngSwitchCase="'h2'" class="text-4xl"> {{ element.text }}</h2>

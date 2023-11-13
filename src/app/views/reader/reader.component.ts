@@ -70,13 +70,17 @@ export class ReaderComponent implements OnInit, OnDestroy {
     document
       .getElementById(id)!
       .scrollIntoView({
-        behavior: 'smooth',
+        behavior: 'auto',
         block: 'start'
       });
   }
 
-  public onTap(index: number) {
+  public onClick(index: number) {
     this.audio && this.index.next(index);
+  }
+
+  public onDoubleClick(index: number) {
+    // ignore - prevents unwanted scrolling
   }
 
   public onSwipeDown() {
