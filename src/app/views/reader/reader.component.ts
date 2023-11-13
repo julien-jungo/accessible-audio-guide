@@ -12,16 +12,14 @@ import { config } from '../../configurations/config';
 })
 export class ReaderComponent implements OnInit, OnDestroy {
 
-  public ready: boolean = false;
-
-  public index = new BehaviorSubject<number | undefined>(undefined);
+  private audio = true;
+  private lang = 'de-DE';
 
   private subs: Subscription[] = [];
 
-  public guide!: Element[];
+  public guide: Element[] = [];
 
-  private audio!: boolean;
-  private lang!: string;
+  public index = new BehaviorSubject<number | undefined>(undefined);
 
   constructor(
     private readonly contentService: ContentService,
@@ -32,14 +30,14 @@ export class ReaderComponent implements OnInit, OnDestroy {
   public ngOnInit() {
     const params = this.route.snapshot.queryParams;
 
-    this.audio = params['audio'] === 'on';
-    this.lang = params['lang']!;
+    this.audio = params['audio'] ? params['audio'] === 'on' : this.audio;
+    this.lang = params['lang'] ? params['lang'] : this.lang;
 
     this.subs.push(
       this.route.data.subscribe(data => {
         this.guide = data['guide'];
-        this.ready = true;
-      }));
+      })
+    );
 
     this.subs.push(
       this.index.subscribe(_ => {
@@ -49,7 +47,8 @@ export class ReaderComponent implements OnInit, OnDestroy {
             this.speak();
           }
         }
-      }));
+      })
+    );
   }
 
   public ngOnDestroy() {
@@ -61,20 +60,17 @@ export class ReaderComponent implements OnInit, OnDestroy {
   }
 
   private speak() {
+    const index = this.index.value!;
+    const element = this.guide[index];
     this.speechService.speak({
-      text: this.guide[this.index.value!].text,
+      text: element.text,
       lang: this.lang
     })
   }
 
   private scroll() {
     const id = `${this.index.value}`;
-    document
-      .getElementById(id)!
-      .scrollIntoView({
-        behavior: 'auto',
-        block: 'start'
-      });
+    document.getElementById(id)!.scrollIntoView();
   }
 
   public onClick(index: number) {
