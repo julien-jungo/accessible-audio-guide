@@ -45,7 +45,9 @@ export class ReaderComponent implements OnInit, OnDestroy {
       this.index.subscribe(_ => {
         if (this.isAvailable()) {
           this.scroll();
-          this.speak();
+          if (this.audio) {
+            this.speak();
+          }
         }
       }));
   }
@@ -76,7 +78,7 @@ export class ReaderComponent implements OnInit, OnDestroy {
   }
 
   public onClick(index: number) {
-    this.audio && this.index.next(index);
+    this.index.next(index);
   }
 
   public onDoubleClick(index: number) {
