@@ -73,11 +73,11 @@ export class ReaderComponent implements OnInit, OnDestroy {
     document.getElementById(id)!.scrollIntoView();
   }
 
-  public onClick(index: number) {
+  public onTap(index: number) {
     this.index.next(index);
   }
 
-  public onDoubleClick(index: number) {
+  public onClick() {
     // ignore - prevents unwanted scrolling
   }
 
