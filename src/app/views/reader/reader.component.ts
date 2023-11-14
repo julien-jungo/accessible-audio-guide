@@ -15,6 +15,8 @@ export class ReaderComponent implements OnInit, OnDestroy {
   private audio = true;
   private lang = 'de-DE';
 
+  private timeoutIDs: number[] = [];
+
   private subs: Subscription[] = [];
 
   public guide: Element[] = [];
@@ -74,11 +76,12 @@ export class ReaderComponent implements OnInit, OnDestroy {
   }
 
   public onClick(index: number) {
-    this.index.next(index);
+    this.timeoutIDs.push(setTimeout(() => this.index.next(index), 200));
   }
 
-  public onDoubleClick(index: number) {
-    // ignore - prevents unwanted scrolling
+  public onDoubleClick() {
+    this.timeoutIDs.forEach(id => clearTimeout(id));
+    this.speechService.togglePlay();
   }
 
   public onSwipeDown() {

@@ -33,11 +33,11 @@ export class SpeechService {
     }
   }
 
-  public pause(): void {
-    this.synthesis?.pause();
-  }
-
-  public resume(): void {
-    this.synthesis?.resume();
+  public togglePlay(): void {
+    if (this.synthesis?.paused) {
+      this.synthesis?.resume();
+    } else if (this.synthesis?.speaking) {
+      this.synthesis?.pause();
+    }
   }
 }
