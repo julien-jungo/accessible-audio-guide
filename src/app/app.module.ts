@@ -23,7 +23,8 @@ import { MenuComponent } from './components/menu/menu.component';
 import { HomeIconComponent } from './components/icons/home-icon/home-icon.component';
 import { InfoIconComponent } from './components/icons/info-icon/info-icon.component';
 import { QrIconComponent } from './components/icons/qr-icon/qr-icon.component';
-import { ClickIconComponent } from './components/icons/click-icon/click-icon.component';
+import { SingleClickIconComponent } from './components/icons/single-click-icon/single-click-icon.component';
+import { DoubleClickIconComponent } from './components/icons/double-click-icon/double-click-icon.component';
 import { ArrowLeftIconComponent } from './components/icons/arrow-left-icon/arrow-left-icon.component';
 import { ArrowRightIconComponent } from './components/icons/arrow-right-icon/arrow-right-icon.component';
 import { ArrowDownIconComponent } from './components/icons/arrow-down-icon/arrow-down-icon.component';
@@ -53,12 +54,13 @@ export class MyHammerConfig extends HammerGestureConfig {
     HomeIconComponent,
     InfoIconComponent,
     QrIconComponent,
-    ClickIconComponent,
+    DoubleClickIconComponent,
     ArrowLeftIconComponent,
     ArrowRightIconComponent,
     ArrowDownIconComponent,
     ArrowUpIconComponent,
-    InfoComponent
+    InfoComponent,
+    SingleClickIconComponent
   ],
   imports: [
     BrowserModule,

@@ -2,10 +2,18 @@
   <ul>
     <li>
       <div class="flex gap-1">
-        <app-click-icon [width]="'w-6'" [height]="'h-6'"/>
+        <app-single-click-icon [width]="'w-6'" [height]="'h-6'"/>
         <span class="font-bold">Klicken</span>
       </div>
-      {{ textClick }}
+      {{ textSingleClick }}
+    </li>
+    <hr>
+    <li>
+      <div class="flex gap-1">
+        <app-double-click-icon [width]="'w-6'" [height]="'h-6'"/>
+        <span class="font-bold">Doppelklicken</span>
+      </div>
+      {{ textDoubleClick }}
     </li>
     <hr>
     <li>
