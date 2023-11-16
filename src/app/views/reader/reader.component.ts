@@ -75,13 +75,12 @@ export class ReaderComponent implements OnInit, OnDestroy {
     document.getElementById(id)!.scrollIntoView();
   }
 
-  public onClick(index: number) {
+  public onTap(index: number) {
     this.timeoutIDs.push(setTimeout(() => this.index.next(index), 200));
   }
 
-  public onDoubleClick() {
-    this.timeoutIDs.forEach(id => clearTimeout(id));
-    this.speechService.togglePlay();
+  public onClick() {
+    // ignore - prevents unwanted scrolling
   }
 
   public onSwipeDown() {

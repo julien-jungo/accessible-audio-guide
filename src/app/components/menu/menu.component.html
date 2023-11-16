@@ -1,5 +1,12 @@
-<app-info [hidden]="hidden"/>
-<div class="flex justify-around bg-black text-white py-4">
+<div #info>
+  <app-info [hidden]="hidden"
+            [maxWidth]="maxWidth"
+            [insetX]="'inset-x-2'"
+            [bottom]="'bottom-24'"
+  />
+</div>
+<footer class="fixed mx-auto flex justify-around bg-black text-white py-4"
+        #menu [ngClass]="[maxWidth, insetX, bottom]">
   <a [routerLink]="'/'">
     <app-home-icon
       [width]="'w-14'"
@@ -15,4 +22,4 @@
       [width]="'w-14'"
       [height]="'h-14'"/>
   </button>
-</div>
+</footer>

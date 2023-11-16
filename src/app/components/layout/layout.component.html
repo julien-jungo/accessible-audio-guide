@@ -1,8 +1,10 @@
 <main>
-  <div class="max-w-screen-sm mx-auto p-5 mb-16">
+  <section class="max-w-screen-sm mx-auto p-5 mb-20">
     <ng-content/>
-  </div>
-  <div class="max-w-screen-sm mx-auto fixed bottom-0 left-0 right-0">
-    <app-menu/>
-  </div>
+  </section>
+  <app-menu
+    [maxWidth]="'max-w-screen-sm'"
+    [insetX]="'inset-x-0'"
+    [bottom]="'bottom-0'"
+  />
 </main>
