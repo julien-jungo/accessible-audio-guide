@@ -75,8 +75,19 @@ export class ReaderComponent implements OnInit, OnDestroy {
     document.getElementById(id)!.scrollIntoView();
   }
 
-  public onTap(index: number) {
-    this.timeoutIDs.push(setTimeout(() => this.index.next(index), 200));
+  public onTap(e: any, index: number) {
+    if (e.tapCount === 1) {
+      this.timeoutIDs.push(setTimeout(() => {
+        this.index.next(index);
+      }, 300));
+    }
+  }
+
+  public onDoubleTap(e: any) {
+    if (e.tapCount === 2) {
+      this.timeoutIDs.forEach(id => clearTimeout(id));
+      this.speechService.togglePlay();
+    }
   }
 
   public onClick() {
