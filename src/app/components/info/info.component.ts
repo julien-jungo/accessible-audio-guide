@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, Input, OnInit } from '@angular/core';
 import { config } from '../../configurations/config';
 
 @Component({
@@ -7,6 +7,10 @@ import { config } from '../../configurations/config';
   styleUrls: ['./info.component.scss']
 })
 export class InfoComponent implements OnInit {
+  @Input() maxWidth: string = 'max-w-none';
+  @Input() insetX: string = 'inset-x-0';
+  @Input() bottom: string = 'bottom-0';
+
   textClick!: string;
   textLeft!:  string;
   textRight!: string;
