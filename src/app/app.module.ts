@@ -34,6 +34,7 @@ import { InfoComponent } from './components/info/info.component';
 @Injectable()
 export class MyHammerConfig extends HammerGestureConfig {
   override overrides = <any> {
+    tap: { threshold: 5, posThreshold: 50 },
     swipe: { direction: Hammer.DIRECTION_ALL },
     // necessary for vertical scrolling
     // see https://shorturl.at/qvzPW
