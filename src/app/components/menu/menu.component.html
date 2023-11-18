@@ -7,17 +7,20 @@
 </div>
 <footer class="fixed mx-auto flex justify-around bg-black text-white py-4"
         #menu [ngClass]="[maxWidth, insetX, bottom]">
-  <a [routerLink]="'/'">
+  <a [routerLink]="'/'"
+     aria-label="Startseite">
     <app-home-icon
       [width]="'w-14'"
       [height]="'h-14'"/>
   </a>
-  <a [routerLink]="'/scanner'">
+  <a [routerLink]="'/scanner'"
+     aria-label="QR-Code Scanner">
     <app-qr-icon
       [width]="'w-14'"
       [height]="'h-14'"/>
   </a>
-  <button (click)="toggleHidden()">
+  <button (click)="toggleHidden()"
+          aria-hidden="true">
     <app-info-icon
       [width]="'w-14'"
       [height]="'h-14'"/>
