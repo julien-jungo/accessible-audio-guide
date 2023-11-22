@@ -94,10 +94,6 @@ export class ReaderComponent implements OnInit, OnDestroy {
     }
   }
 
-  public onClick() {
-    // ignore - prevents unwanted scrolling
-  }
-
   public onSwipeDown() {
     this.index.next(this.strategy.onSwipeDown(this.index.value!));
   }

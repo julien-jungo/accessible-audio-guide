@@ -1,19 +1,21 @@
-<app-layout (swipeup)="onSwipeUp()"
-            (swipedown)="onSwipeDown()"
-            (swipeleft)="onSwipeLeft()"
-            (swiperight)="onSwipeRight()"
-            (tap)="onDoubleTap($event)">
-  <ng-container *ngFor="let element of guide; index as i">
-    <div [ngSwitch]="element.tag" [id]="i" (tap)="onTap($event, i)" (click)="onClick()"
-         [ngClass]="{ 'outline-dashed outline-2 outline-offset-2': isAvailable() && (i === index.value) }"
-         class="cursor-pointer scroll-mt-2 mb-3">
-      <p  *ngSwitchCase="'p'"  class="text-base">{{ element.text }}</p>
-      <h1 *ngSwitchCase="'h1'" class="text-5xl"> {{ element.text }}</h1>
-      <h2 *ngSwitchCase="'h2'" class="text-4xl"> {{ element.text }}</h2>
-      <h3 *ngSwitchCase="'h3'" class="text-3xl"> {{ element.text }}</h3>
-      <h4 *ngSwitchCase="'h4'" class="text-2xl"> {{ element.text }}</h4>
-      <h5 *ngSwitchCase="'h5'" class="text-xl">  {{ element.text }}</h5>
-      <h6 *ngSwitchCase="'h6'" class="text-lg">  {{ element.text }}</h6>
-    </div>
-  </ng-container>
+<app-layout>
+  <div (swipeup)   ="onSwipeUp()"
+       (swipedown) ="onSwipeDown()"
+       (swipeleft) ="onSwipeLeft()"
+       (swiperight)="onSwipeRight()"
+       (tap)       ="onDoubleTap($event)">
+    <ng-container *ngFor="let element of guide; index as i">
+      <div [ngSwitch]="element.tag" [id]="i" (tap)="onTap($event, i)"
+           [ngClass]="{ 'outline-dashed outline-2 outline-offset-2': isAvailable() && (i === index.value) }"
+           class="cursor-pointer scroll-mt-2 mb-3">
+        <p  *ngSwitchCase="'p'"  class="text-base">{{ element.text }}</p>
+        <h1 *ngSwitchCase="'h1'" class="text-5xl"> {{ element.text }}</h1>
+        <h2 *ngSwitchCase="'h2'" class="text-4xl"> {{ element.text }}</h2>
+        <h3 *ngSwitchCase="'h3'" class="text-3xl"> {{ element.text }}</h3>
+        <h4 *ngSwitchCase="'h4'" class="text-2xl"> {{ element.text }}</h4>
+        <h5 *ngSwitchCase="'h5'" class="text-xl">  {{ element.text }}</h5>
+        <h6 *ngSwitchCase="'h6'" class="text-lg">  {{ element.text }}</h6>
+      </div>
+    </ng-container>
+  </div>
 </app-layout>
