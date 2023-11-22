@@ -5,6 +5,7 @@ import { ContentService, Element } from "../../services/content.service";
 import { BehaviorSubject, Subscription } from "rxjs";
 import { config } from '../../configurations/config';
 import { ISwipeStrategy } from "../../strategies/ISwipeStrategy";
+import { AudioService } from "../../services/audio.service";
 
 @Component({
   selector: 'app-reader',
@@ -15,7 +16,6 @@ export class ReaderComponent implements OnInit, OnDestroy {
 
   private strategy!: ISwipeStrategy;
 
-  private audio = true;
   private lang = 'de-DE';
 
   private timeoutIDs: number[] = [];
@@ -24,24 +24,30 @@ export class ReaderComponent implements OnInit, OnDestroy {
 
   public guide: Element[] = [];
 
+  public audio: BehaviorSubject<boolean>;
+
   public index = new BehaviorSubject<number | undefined>(undefined);
 
   constructor(
     private readonly contentService: ContentService,
     private readonly speechService: SpeechService,
+    private readonly audioService: AudioService,
     private readonly route: ActivatedRoute,
-  ) {}
+  ) {
+    this.audio = audioService.audio;
+  }
 
   public ngOnInit() {
     const params = this.route.snapshot.queryParams;
 
-    this.audio = params['audio'] ? params['audio'] === 'on' : this.audio;
+    this.audioService.initAudio(params['audio'] === 'on');
     this.lang = params['lang'] ? params['lang'] : this.lang;
 
     this.subs.push(
       this.route.data.subscribe(data => {
         this.guide = data['guide'];
-        this.strategy = new config.swipeStrategy(this.guide);
+        this.strategy = new config
+          .swipeStrategy(this.guide);
       })
     );
 
@@ -49,7 +55,7 @@ export class ReaderComponent implements OnInit, OnDestroy {
       this.index.subscribe(_ => {
         if (this.isAvailable()) {
           this.scroll();
-          if (this.audio) {
+          if (this.audio.value) {
             this.speak();
           }
         }

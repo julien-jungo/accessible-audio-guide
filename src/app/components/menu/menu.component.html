@@ -19,6 +19,17 @@
       [width]="'w-14'"
       [height]="'h-14'"/>
   </a>
+  <button (click)="toggleAudio()"
+          aria-hidden="true">
+    <app-audio-on-icon
+      *ngIf="audioEnabled() | async"
+      [width]="'w-14'"
+      [height]="'h-14'"/>
+    <app-audio-off-icon
+      *ngIf="audioDisabled() | async"
+      [width]="'w-14'"
+      [height]="'h-14'"/>
+  </button>
   <button (click)="toggleHidden()"
           aria-hidden="true">
     <app-info-icon

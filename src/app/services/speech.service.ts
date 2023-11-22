@@ -33,6 +33,10 @@ export class SpeechService {
     }
   }
 
+  public cancel(): void {
+    this.synthesis?.cancel();
+  }
+
   public togglePlay(): void {
     if (this.synthesis?.paused) {
       this.synthesis?.resume();

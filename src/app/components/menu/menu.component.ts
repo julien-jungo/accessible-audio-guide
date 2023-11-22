@@ -1,4 +1,6 @@
 import { Component, ElementRef, HostListener, Input, ViewChild } from '@angular/core';
+import { AudioService } from "../../services/audio.service";
+import { BehaviorSubject, map } from "rxjs";
 
 @Component({
   selector: 'app-menu',
@@ -12,11 +14,17 @@ export class MenuComponent {
 
   hidden: boolean = true;
 
+  audio: BehaviorSubject<boolean>;
+
   @ViewChild('info')
   private info!: ElementRef;
 
   @ViewChild('menu')
   private menu!: ElementRef;
+
+  constructor(private readonly audioService: AudioService) {
+    this.audio = audioService.audio;
+  }
 
   @HostListener('document:click', ['$event'])
   private onClick(e: Event) {
@@ -30,5 +38,18 @@ export class MenuComponent {
 
   toggleHidden() {
     this.hidden = !this.hidden;
+  }
+
+  toggleAudio() {
+    this.audio.next(!this.audio.value);
+  }
+
+  audioEnabled() {
+    return this.audio.asObservable();
+  }
+
+  audioDisabled() {
+    return this.audio.asObservable()
+      .pipe(map(audio => !audio));
   }
 }
