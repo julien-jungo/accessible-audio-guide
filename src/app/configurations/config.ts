@@ -1,5 +1,5 @@
-import { SwipeStrategyV1 } from "../strategies/SwipeStrategyV1";
-import { SwipeStrategyV2 } from "../strategies/SwipeStrategyV2";
+import swipeBehaviorV1 from "../behaviors/SwipeBehaviorV1";
+import swipeBehaviorV2 from "../behaviors/SwipeBehaviorV2";
 
 const isProd = true;
 
@@ -8,14 +8,14 @@ const devContext = '';
 
 const variant = 'V2';
 
-const swipeStrategies = {
-  'V1': SwipeStrategyV1,
-  'V2': SwipeStrategyV2,
+const swipeBehaviors = {
+  'V1': swipeBehaviorV1,
+  'V2': swipeBehaviorV2,
 }
 
 export const config = {
   isProd,
   variant,
   context: isProd ? prodContext : devContext,
-  swipeStrategy: swipeStrategies[variant],
+  swipeBehavior: swipeBehaviors[variant],
 };

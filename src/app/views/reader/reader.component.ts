@@ -4,8 +4,8 @@ import { SpeechService } from "../../services/speech.service";
 import { ContentService, Element } from "../../services/content.service";
 import { BehaviorSubject, Subscription } from "rxjs";
 import { config } from '../../configurations/config';
-import { ISwipeStrategy } from "../../strategies/ISwipeStrategy";
 import { AudioService } from "../../services/audio.service";
+import { ISwipeBehavior } from "../../behaviors/ISwipeBehavior";
 
 @Component({
   selector: 'app-reader',
@@ -14,7 +14,7 @@ import { AudioService } from "../../services/audio.service";
 })
 export class ReaderComponent implements OnInit, OnDestroy {
 
-  private strategy!: ISwipeStrategy;
+  private behavior: ISwipeBehavior = config.swipeBehavior;
 
   private lang = 'de-DE';
 
@@ -46,8 +46,6 @@ export class ReaderComponent implements OnInit, OnDestroy {
     this.subs.push(
       this.route.data.subscribe(data => {
         this.guide = data['guide'];
-        this.strategy = new config
-          .swipeStrategy(this.guide);
       })
     );
 
@@ -101,18 +99,22 @@ export class ReaderComponent implements OnInit, OnDestroy {
   }
 
   public onSwipeDown() {
-    this.index.next(this.strategy.onSwipeDown(this.index.value!));
+    this.index.next(this.behavior.swipeDownCommand
+      .findIndex(this.guide, this.index.value!));
   }
 
   public onSwipeUp() {
-    this.index.next(this.strategy.onSwipeUp(this.index.value!));
+    this.index.next(this.behavior.swipeUpCommand
+      .findIndex(this.guide, this.index.value!));
   }
 
   public onSwipeRight() {
-    this.index.next(this.strategy.onSwipeRight(this.index.value!));
+    this.index.next(this.behavior.swipeRightCommand
+      .findIndex(this.guide, this.index.value!));
   }
 
   public onSwipeLeft() {
-    this.index.next(this.strategy.onSwipeLeft(this.index.value!));
+    this.index.next(this.behavior.swipeLeftCommand
+      .findIndex(this.guide, this.index.value!));
   }
 }
