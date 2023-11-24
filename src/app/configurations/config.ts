@@ -6,7 +6,7 @@ const isProd = true;
 const prodContext = '/accessible-audio-guide';
 const devContext = '';
 
-const variant = 'V2';
+const variant = 'V1';
 
 const swipeBehaviors = {
   'V1': swipeBehaviorV1,
