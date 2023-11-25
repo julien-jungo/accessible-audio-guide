@@ -3,9 +3,10 @@ import { ActivatedRoute } from "@angular/router";
 import { SpeechService } from "../../services/speech.service";
 import { ContentService, Element } from "../../services/content.service";
 import { BehaviorSubject, Subscription } from "rxjs";
-import { config } from '../../configurations/config';
 import { AudioService } from "../../services/audio.service";
-import { ISwipeBehavior } from "../../behaviors/ISwipeBehavior";
+import { config } from "../../configurations/config";
+
+interface Map { [direction: string]: number | undefined }
 
 @Component({
   selector: 'app-reader',
@@ -14,11 +15,18 @@ import { ISwipeBehavior } from "../../behaviors/ISwipeBehavior";
 })
 export class ReaderComponent implements OnInit, OnDestroy {
 
-  private behavior: ISwipeBehavior = config.swipeBehavior;
-
   private lang = 'de-DE';
 
-  private timeoutIDs: number[] = [];
+  private behavior = config.swipeBehavior;
+
+  private swipeTimeoutIDs: Map = {
+    RIGHT: undefined,
+    LEFT:  undefined,
+    DOWN:  undefined,
+    UP:    undefined
+  }
+
+  private tapTimeoutIDs: number[] = [];
 
   private subs: Subscription[] = [];
 
@@ -85,7 +93,7 @@ export class ReaderComponent implements OnInit, OnDestroy {
 
   public onTap(e: any, index: number) {
     if (e.tapCount === 1) {
-      this.timeoutIDs.push(setTimeout(() => {
+      this.tapTimeoutIDs.push(setTimeout(() => {
         this.index.next(index);
       }, 300));
     }
@@ -93,28 +101,87 @@ export class ReaderComponent implements OnInit, OnDestroy {
 
   public onDoubleTap(e: any) {
     if (e.tapCount === 2) {
-      this.timeoutIDs.forEach(id => clearTimeout(id));
+      this.tapTimeoutIDs.forEach(id => clearTimeout(id));
       this.speechService.togglePlay();
     }
   }
 
-  public onSwipeDown() {
-    this.index.next(this.behavior.swipeDownCommand
-      .findIndex(this.guide, this.index.value!));
-  }
-
-  public onSwipeUp() {
-    this.index.next(this.behavior.swipeUpCommand
-      .findIndex(this.guide, this.index.value!));
-  }
-
   public onSwipeRight() {
-    this.index.next(this.behavior.swipeRightCommand
-      .findIndex(this.guide, this.index.value!));
+    this.onSwipe('RIGHT',
+      () => this.indexForSingleSwipeRight(),
+      () => this.indexForDoubleSwipeRight());
   }
 
   public onSwipeLeft() {
-    this.index.next(this.behavior.swipeLeftCommand
-      .findIndex(this.guide, this.index.value!));
+    this.onSwipe('LEFT',
+      () => this.indexForSingleSwipeLeft(),
+      () => this.indexForDoubleSwipeLeft());
+  }
+
+  public onSwipeDown() {
+    this.onSwipe('DOWN',
+      () => this.indexForSingleSwipeDown(),
+      () => this.indexForDoubleSwipeDown());
+  }
+
+  public onSwipeUp() {
+    this.onSwipe('UP',
+      () => this.indexForSingleSwipeUp(),
+      () => this.indexForDoubleSwipeUp());
+  }
+
+  private onSwipe(direction: string,
+                  indexForSingleSwipe: () => number,
+                  indexForDoubleSwipe: () => number) {
+    if (this.swipeTimeoutIDs[direction] === undefined) {
+      this.swipeTimeoutIDs[direction] = setTimeout(() => {
+        this.swipeTimeoutIDs[direction] = undefined;
+        this.index.next(indexForSingleSwipe());
+      }, 300);
+    } else {
+      clearTimeout(this.swipeTimeoutIDs[direction]);
+      this.swipeTimeoutIDs[direction] = undefined;
+      this.index.next(indexForDoubleSwipe());
+    }
+  }
+
+  private indexForSingleSwipeRight() {
+    return this.behavior.singleSwipeRightCommand
+      .findIndex(this.guide, this.index.value!);
+  }
+
+  private indexForDoubleSwipeRight() {
+    return this.behavior.doubleSwipeRightCommand
+      .findIndex(this.guide, this.index.value!);
+  }
+
+  private indexForSingleSwipeLeft() {
+    return this.behavior.singleSwipeLeftCommand
+      .findIndex(this.guide, this.index.value!);
+  }
+
+  private indexForDoubleSwipeLeft() {
+    return this.behavior.doubleSwipeLeftCommand
+      .findIndex(this.guide, this.index.value!);
+  }
+
+  private indexForSingleSwipeDown() {
+    return this.behavior.singleSwipeDownCommand
+      .findIndex(this.guide, this.index.value!);
+  }
+
+  private indexForDoubleSwipeDown() {
+    return this.behavior.doubleSwipeDownCommand
+      .findIndex(this.guide, this.index.value!);
+  }
+
+  private indexForSingleSwipeUp() {
+    return this.behavior.singleSwipeUpCommand
+      .findIndex(this.guide, this.index.value!);
+  }
+
+  private indexForDoubleSwipeUp() {
+    return this.behavior.doubleSwipeUpCommand
+      .findIndex(this.guide, this.index.value!);
   }
 }

@@ -11,8 +11,12 @@ export class InfoComponent {
   @Input() insetX   = 'inset-x-0';
   @Input() bottom   = 'bottom-0';
 
-  textSwipeRight = config.swipeBehavior.swipeRightCommand.description;
-  textSwipeLeft  = config.swipeBehavior.swipeLeftCommand.description;
-  textSwipeDown  = config.swipeBehavior.swipeDownCommand.description;
-  textSwipeUp    = config.swipeBehavior.swipeUpCommand.description;
+  textSingleSwipeRight = config.swipeBehavior.singleSwipeRightCommand.description;
+  textDoubleSwipeRight = config.swipeBehavior.doubleSwipeRightCommand.description;
+  textSingleSwipeLeft  = config.swipeBehavior.singleSwipeLeftCommand.description;
+  textDoubleSwipeLeft  = config.swipeBehavior.doubleSwipeLeftCommand.description;
+  textSingleSwipeDown  = config.swipeBehavior.singleSwipeDownCommand.description;
+  textDoubleSwipeDown  = config.swipeBehavior.doubleSwipeDownCommand.description;
+  textSingleSwipeUp    = config.swipeBehavior.singleSwipeUpCommand.description;
+  textDoubleSwipeUp    = config.swipeBehavior.doubleSwipeUpCommand.description;
 }
