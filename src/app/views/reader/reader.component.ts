@@ -39,6 +39,9 @@ export class ReaderComponent implements OnInit, OnDestroy {
     private readonly route: ActivatedRoute,
   ) {
     this.audio = audioService.audio;
+    this.subs.push(this.audio.subscribe(_ => {
+      this.index.next(undefined);
+    }));
   }
 
   public ngOnInit() {
@@ -115,22 +118,26 @@ export class ReaderComponent implements OnInit, OnDestroy {
   }
 
   public onSwipeDown() {
-    this.index.next(this.behavior.swipeDownCommand
+    this.isAvailable() && this.index
+      .next(this.behavior.swipeDownCommand
       .findIndex(this.guide, this.index.value!));
   }
 
   public onSwipeUp() {
-    this.index.next(this.behavior.swipeUpCommand
+    this.isAvailable() && this.index
+      .next(this.behavior.swipeUpCommand
       .findIndex(this.guide, this.index.value!));
   }
 
   public onSwipeRight() {
-    this.index.next(this.behavior.swipeRightCommand
+    this.isAvailable() && this.index
+      .next(this.behavior.swipeRightCommand
       .findIndex(this.guide, this.index.value!));
   }
 
   public onSwipeLeft() {
-    this.index.next(this.behavior.swipeLeftCommand
+    this.isAvailable() && this.index
+      .next(this.behavior.swipeLeftCommand
       .findIndex(this.guide, this.index.value!));
   }
 }
