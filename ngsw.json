@@ -1,6 +1,6 @@
 {
   "configVersion": 1,
-  "timestamp": 1700840077797,
+  "timestamp": 1701019323433,
   "index": "/accessible-audio-guide/index.html",
   "assetGroups": [
     {
@@ -14,11 +14,11 @@
         "/accessible-audio-guide/920.e8d23bf976f65f02.js",
         "/accessible-audio-guide/favicon.ico",
         "/accessible-audio-guide/index.html",
-        "/accessible-audio-guide/main.194d0bbe6dd8e054.js",
+        "/accessible-audio-guide/main.9781858965c18441.js",
         "/accessible-audio-guide/manifest.webmanifest",
         "/accessible-audio-guide/polyfills.a113f501661ea88d.js",
         "/accessible-audio-guide/runtime.6ef2d015e0c3d4ba.js",
-        "/accessible-audio-guide/styles.8dca2a804bc20496.css"
+        "/accessible-audio-guide/styles.3f60e3da559b4124.css"
       ],
       "patterns": []
     },
@@ -56,12 +56,12 @@
     "/accessible-audio-guide/assets/icons/icon-72x72.png": "ca17dd91d0be7607af3db2b5e177155cebfcb03e",
     "/accessible-audio-guide/assets/icons/icon-96x96.png": "af69d4c76c413ed07e7d89f0e9e241f2a9368d11",
     "/accessible-audio-guide/favicon.ico": "f699679c29e01ab71ca432c1eadb780bd7d343e3",
-    "/accessible-audio-guide/index.html": "76af74fd24c5744edb266e408dd2e18c7ca07838",
-    "/accessible-audio-guide/main.194d0bbe6dd8e054.js": "c0ec104e849ee5d563f16c9406222daf79c1564e",
+    "/accessible-audio-guide/index.html": "feed38579f4ed29e6c3ade464d3736b0f9dde43c",
+    "/accessible-audio-guide/main.9781858965c18441.js": "084aa0b32f73259519edc90548801e8f947000c0",
     "/accessible-audio-guide/manifest.webmanifest": "1eddd6fd3699c24214794e0b52b8e623a9b77de8",
     "/accessible-audio-guide/polyfills.a113f501661ea88d.js": "8d73bc98ddfbbf0c249c826ac7bc0f82a9312149",
     "/accessible-audio-guide/runtime.6ef2d015e0c3d4ba.js": "eaafa731c3866882b8f67c2073ef53c43f7b5bce",
-    "/accessible-audio-guide/styles.8dca2a804bc20496.css": "87a8a8d990c699caf4caedd33f8a7810472859d6"
+    "/accessible-audio-guide/styles.3f60e3da559b4124.css": "4e2938266ca970104324bcb6f2599a1391e04935"
   },
   "navigationUrls": [
     {
