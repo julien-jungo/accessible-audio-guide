@@ -7,6 +7,8 @@ import { config } from '../../configurations/config';
 import { AudioService } from "../../services/audio.service";
 import { ISwipeBehavior } from "../../behaviors/ISwipeBehavior";
 
+const TEXT_SIZES = ['text-lg', 'text-xl', 'text-2xl', 'text-3xl', 'text-4xl', 'text-5xl'];
+
 @Component({
   selector: 'app-reader',
   templateUrl: './reader.component.html',
@@ -28,6 +30,8 @@ export class ReaderComponent implements OnInit, OnDestroy {
 
   public index = new BehaviorSubject<number | undefined>(undefined);
 
+  public textSizes: {[heading: string]: string} = {};
+
   constructor(
     private readonly contentService: ContentService,
     private readonly speechService: SpeechService,
@@ -46,6 +50,7 @@ export class ReaderComponent implements OnInit, OnDestroy {
     this.subs.push(
       this.route.data.subscribe(data => {
         this.guide = data['guide'];
+        this.initTextSizes();
       })
     );
 
@@ -67,6 +72,17 @@ export class ReaderComponent implements OnInit, OnDestroy {
 
   public isAvailable() {
     return this.index.value !== undefined;
+  }
+
+  private initTextSizes() {
+    let i = this.guide // compute max heading level
+      .map(e => e.tag.charAt(0) === 'h' ? +e.tag.charAt(1) : 0)
+      .reduce((acc, curr) => Math.max(acc, curr));
+
+    for (const textSize of TEXT_SIZES) {
+      this.textSizes['h' + i--] = textSize;
+      if (i === 0) break;
+    }
   }
 
   private speak() {
