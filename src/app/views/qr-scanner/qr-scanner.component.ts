@@ -35,7 +35,7 @@ export class QrScannerComponent implements AfterViewInit, OnDestroy {
         // prevent camera glitches
         setTimeout(() => {
           this.ready = true;
-        }, 500);
+        }, 750);
       }
     });
   }
