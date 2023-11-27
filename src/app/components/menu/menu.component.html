@@ -33,6 +33,11 @@
   <button (click)="toggleHidden()"
           aria-hidden="true">
     <app-info-icon
+      [hidden]="!hidden"
+      [width]="'w-14'"
+      [height]="'h-14'"/>
+    <app-cross-icon
+      [hidden]="hidden"
       [width]="'w-14'"
       [height]="'h-14'"/>
   </button>

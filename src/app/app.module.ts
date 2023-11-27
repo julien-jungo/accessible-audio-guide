@@ -32,6 +32,7 @@ import { ArrowUpIconComponent } from './components/icons/arrow-up-icon/arrow-up-
 import { InfoComponent } from './components/info/info.component';
 import { AudioOnIconComponent } from './components/icons/audio-on-icon/audio-on-icon.component';
 import { AudioOffIconComponent } from './components/icons/audio-off-icon/audio-off-icon.component';
+import { CrossIconComponent } from './components/icons/cross-icon/cross-icon.component';
 
 @Injectable()
 export class MyHammerConfig extends HammerGestureConfig {
@@ -65,7 +66,8 @@ export class MyHammerConfig extends HammerGestureConfig {
     InfoComponent,
     SingleClickIconComponent,
     AudioOnIconComponent,
-    AudioOffIconComponent
+    AudioOffIconComponent,
+    CrossIconComponent
   ],
   imports: [
     BrowserModule,
