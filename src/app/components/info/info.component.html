@@ -2,83 +2,158 @@
      [ngClass]="[maxWidth, insetX, bottom]">
   <ul>
     <li>
-      <div class="flex gap-1">
-        <app-single-click-icon [width]="'w-6'" [height]="'h-6'"/>
-        <span class="font-bold">Klicken</span>
-      </div>
-      Zu beliebigem Text wechseln
+      <table>
+        <tbody>
+        <tr>
+          <td>
+            <app-single-click-icon [width]="'w-6'" [height]="'h-6'"/>
+          </td>
+          <td>
+            <span class="font-bold">Klicken</span>
+          </td>
+        </tr>
+        <tr>
+          <td class="font-bold">
+            1x
+          </td>
+          <td>
+            Zu beliebigem Text wechseln
+          </td>
+        </tr>
+        <tr>
+          <td class="font-bold">
+            2x
+          </td>
+          <td>
+            Vorlesen pausieren bzw. fortsetzen
+          </td>
+        </tr>
+        </tbody>
+      </table>
     </li>
     <hr>
     <li>
-      <div class="flex gap-1">
-        <app-double-click-icon [width]="'w-6'" [height]="'h-6'"/>
-        <span class="font-bold">Doppelklicken</span>
-      </div>
-      Vorlesen pausieren bzw. fortsetzen
+      <table>
+        <tbody>
+        <tr>
+          <td>
+            <app-arrow-left-icon [width]="'w-6'" [height]="'h-6'"/>
+          </td>
+          <td>
+            <span class="font-bold">Nach links streichen</span>
+          </td>
+        </tr>
+        <tr>
+          <td class="font-bold">
+            1x
+          </td>
+          <td>
+            {{ textSingleSwipeLeft }}
+          </td>
+        </tr>
+        <tr>
+          <td class="font-bold">
+            2x
+          </td>
+          <td>
+            {{ textDoubleSwipeLeft }}
+          </td>
+        </tr>
+        </tbody>
+      </table>
     </li>
     <hr>
     <li>
-      <div class="flex gap-1">
-        <app-arrow-left-icon [width]="'w-6'" [height]="'h-6'"/>
-        <span class="font-bold">1x - Einmal nach links streichen</span>
-      </div>
-      {{ textSingleSwipeLeft }}
+      <table>
+        <tbody>
+        <tr>
+          <td>
+            <app-arrow-right-icon [width]="'w-6'" [height]="'h-6'"/>
+          </td>
+          <td>
+            <span class="font-bold">Nach rechts streichen</span>
+          </td>
+        </tr>
+        <tr>
+          <td class="font-bold">
+            1x
+          </td>
+          <td>
+            {{ textSingleSwipeRight }}
+          </td>
+        </tr>
+        <tr>
+          <td class="font-bold">
+            2x
+          </td>
+          <td>
+            {{ textDoubleSwipeRight }}
+          </td>
+        </tr>
+        </tbody>
+      </table>
     </li>
     <hr>
     <li>
-      <div class="flex gap-1">
-        <app-arrow-left-icon [width]="'w-6'" [height]="'h-6'"/>
-        <span class="font-bold">2x - Zweimal nach links streichen</span>
-      </div>
-      {{ textDoubleSwipeLeft }}
+      <table>
+        <tbody>
+        <tr>
+          <td>
+            <app-arrow-up-icon [width]="'w-6'" [height]="'h-6'"/>
+          </td>
+          <td>
+            <span class="font-bold">Nach oben streichen</span>
+          </td>
+        </tr>
+        <tr>
+          <td class="font-bold">
+            1x
+          </td>
+          <td>
+            {{ textSingleSwipeUp }}
+          </td>
+        </tr>
+        <tr>
+          <td class="font-bold">
+            2x
+          </td>
+          <td>
+            {{ textDoubleSwipeUp }}
+          </td>
+        </tr>
+        </tbody>
+      </table>
     </li>
     <hr>
     <li>
-      <div class="flex gap-1">
-        <app-arrow-right-icon [width]="'w-6'" [height]="'h-6'"/>
-        <span class="font-bold">1x - Einmal nach rechts streichen</span>
-      </div>
-      {{ textSingleSwipeRight }}
-    </li>
-    <hr>
-    <li>
-      <div class="flex gap-1">
-        <app-arrow-right-icon [width]="'w-6'" [height]="'h-6'"/>
-        <span class="font-bold">2x - Zweimal nach rechts streichen</span>
-      </div>
-      {{ textDoubleSwipeRight }}
-    </li>
-    <hr>
-    <li>
-      <div class="flex gap-1">
-        <app-arrow-up-icon [width]="'w-6'" [height]="'h-6'"/>
-        <span class="font-bold">1x - Einmal nach oben streichen</span>
-      </div>
-      {{ textSingleSwipeUp }}
-    </li>
-    <hr>
-    <li>
-      <div class="flex gap-1">
-        <app-arrow-up-icon [width]="'w-6'" [height]="'h-6'"/>
-        <span class="font-bold">2x - Zweimal nach oben streichen</span>
-      </div>
-      {{ textDoubleSwipeUp }}
-    </li>
-    <hr>
-    <li>
-      <div class="flex gap-1">
-        <app-arrow-down-icon [width]="'w-6'" [height]="'h-6'"/>
-        <span class="font-bold">1x - Einmal nach unten streichen</span>
-      </div>
-      {{ textSingleSwipeDown }}
-    </li>
-    <hr>
-    <li>
-      <div class="flex gap-1">
-        <app-arrow-down-icon [width]="'w-6'" [height]="'h-6'"/>
-        <span class="font-bold">2x - Zweimal nach unten streichen</span>
-      </div>
-      {{ textDoubleSwipeDown }}
+      <table>
+        <tbody>
+          <tr>
+            <td>
+              <app-arrow-down-icon [width]="'w-6'" [height]="'h-6'"/>
+            </td>
+            <td>
+              <span class="font-bold">Nach unten streichen</span>
+            </td>
+          </tr>
+          <tr>
+            <td class="font-bold">
+              1x
+            </td>
+            <td>
+              {{ textSingleSwipeDown }}
+            </td>
+          </tr>
+          <tr>
+            <td class="font-bold">
+              2x
+            </td>
+            <td>
+              {{ textDoubleSwipeDown }}
+            </td>
+          </tr>
+        </tbody>
+      </table>
     </li>
   </ul>
 </div>

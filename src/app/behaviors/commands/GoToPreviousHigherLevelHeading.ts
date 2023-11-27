@@ -3,7 +3,7 @@ import { ISwipeCommand } from "./ISwipeCommand";
 import ElementUtil from "./util/ElementUtil";
 
 export class GoToPreviousHigherLevelHeading implements ISwipeCommand {
-  description = 'Zur vorherigen höheren Überschrift wechseln';
+  description = 'Zur letzten höheren Überschrift';
 
   findIndex(elements: Element[], i: number) {
     const current = elements.at(i)!;

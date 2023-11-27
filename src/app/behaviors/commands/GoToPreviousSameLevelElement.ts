@@ -3,7 +3,7 @@ import { ISwipeCommand } from "./ISwipeCommand";
 import ElementUtil from "./util/ElementUtil";
 
 export class GoToPreviousSameLevelElement implements ISwipeCommand {
-  description = 'Zum vorherigen Text gleicher Ebene';
+  description = 'Zum letzten Text gleicher Ebene';
 
   findIndex(elements: Element[], curr: number) {
     const current = elements.at(curr)!;
