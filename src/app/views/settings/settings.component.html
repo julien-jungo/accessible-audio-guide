@@ -6,25 +6,6 @@
     <tbody>
       <tr>
         <td>
-          <button (tap)="setTheme(Theme.LIGHT)"
-                  class="p-1 rounded outline-1"
-                  [ngClass]="{ 'outline': isTheme(Theme.LIGHT) | async }">
-            <app-light-theme-icon [width]="'w-6'" [height]="'h-6'"/>
-          </button>
-        </td>
-        <td>
-          <button (tap)="setTheme(Theme.DARK)"
-                  class="p-1 rounded outline-1"
-                  [ngClass]="{ 'outline': isTheme(Theme.DARK) | async }">
-            <app-dark-theme-icon [width]="'w-6'" [height]="'h-6'"/>
-          </button>
-        </td>
-        <td class="p-2">
-          Farbschema
-        </td>
-      </tr>
-      <tr>
-        <td>
           <button (tap)="setRate(Rate.SLOW)"
                   class="p-1 rounded outline-1"
                   [ngClass]="{ 'outline': isRate(Rate.SLOW) }">
@@ -40,6 +21,25 @@
         </td>
         <td class="p-2">
           Sprachgeschwindigkeit
+        </td>
+      </tr>
+      <tr>
+        <td>
+          <button (tap)="setTheme(Theme.LIGHT)"
+                  class="p-1 rounded outline-1"
+                  [ngClass]="{ 'outline': isTheme(Theme.LIGHT) | async }">
+            <app-light-theme-icon [width]="'w-6'" [height]="'h-6'"/>
+          </button>
+        </td>
+        <td>
+          <button (tap)="setTheme(Theme.DARK)"
+                  class="p-1 rounded outline-1"
+                  [ngClass]="{ 'outline': isTheme(Theme.DARK) | async }">
+            <app-dark-theme-icon [width]="'w-6'" [height]="'h-6'"/>
+          </button>
+        </td>
+        <td class="p-2">
+          Farbschema
         </td>
       </tr>
       <tr>
