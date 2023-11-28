@@ -33,6 +33,13 @@ import { InfoComponent } from './components/info/info.component';
 import { AudioOnIconComponent } from './components/icons/audio-on-icon/audio-on-icon.component';
 import { AudioOffIconComponent } from './components/icons/audio-off-icon/audio-off-icon.component';
 import { CrossIconComponent } from './components/icons/cross-icon/cross-icon.component';
+import { SettingsComponent } from './views/settings/settings.component';
+import { LightThemeIconComponent } from './components/icons/light-theme-icon/light-theme-icon.component';
+import { DarkThemeIconComponent } from './components/icons/dark-theme-icon/dark-theme-icon.component';
+import { FastIconComponent } from './components/icons/fast-icon/fast-icon.component';
+import { SlowIconComponent } from './components/icons/slow-icon/slow-icon.component';
+import { MagnifierMinusIconComponent } from './components/icons/magnifier-minus-icon/magnifier-minus-icon.component';
+import { MagnifierPlusIconComponent } from './components/icons/magnifier-plus-icon/magnifier-plus-icon.component';
 
 @Injectable()
 export class MyHammerConfig extends HammerGestureConfig {
@@ -67,7 +74,14 @@ export class MyHammerConfig extends HammerGestureConfig {
     SingleClickIconComponent,
     AudioOnIconComponent,
     AudioOffIconComponent,
-    CrossIconComponent
+    CrossIconComponent,
+    SettingsComponent,
+    LightThemeIconComponent,
+    DarkThemeIconComponent,
+    FastIconComponent,
+    SlowIconComponent,
+    MagnifierMinusIconComponent,
+    MagnifierPlusIconComponent
   ],
   imports: [
     BrowserModule,

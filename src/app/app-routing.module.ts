@@ -5,6 +5,7 @@ import { ReaderComponent } from "./views/reader/reader.component";
 import { ErrorComponent } from "./views/error/error.component";
 import { preloadResolver } from "./resolvers/preload.resolver";
 import { HomeComponent } from "./views/home/home.component";
+import { SettingsComponent } from "./views/settings/settings.component";
 
 const routes: Routes = [
   {
@@ -19,6 +20,10 @@ const routes: Routes = [
     path: 'reader',
     component: ReaderComponent,
     resolve: { guide: preloadResolver }
+  },
+  {
+    path: 'settings',
+    component: SettingsComponent
   },
   {
     path: 'error',
