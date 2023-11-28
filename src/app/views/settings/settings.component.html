@@ -5,13 +5,17 @@
   <table>
     <tbody>
       <tr>
-        <td class="p-2">
-          <button>
+        <td>
+          <button (tap)="setTheme(Theme.LIGHT)"
+                  class="p-1 rounded border-1 border-black dark:border-dark"
+                  [ngClass]="{ 'border': isTheme(Theme.LIGHT) | async }">
             <app-light-theme-icon [width]="'w-6'" [height]="'h-6'"/>
           </button>
         </td>
-        <td class="p-2">
-          <button>
+        <td>
+          <button (tap)="setTheme(Theme.DARK)"
+                  class="p-1 rounded border-1 border-black dark:border-dark"
+                  [ngClass]="{ 'border': isTheme(Theme.DARK) | async }">
             <app-dark-theme-icon [width]="'w-6'" [height]="'h-6'"/>
           </button>
         </td>
@@ -20,13 +24,13 @@
         </td>
       </tr>
       <tr>
-        <td class="p-2">
-          <button>
+        <td>
+          <button class="p-2">
             <app-slow-icon [width]="'w-6'" [height]="'h-6'"/>
           </button>
         </td>
-        <td class="p-2">
-          <button>
+        <td>
+          <button class="p-2">
             <app-fast-icon [width]="'w-6'" [height]="'h-6'"/>
           </button>
         </td>
@@ -35,13 +39,13 @@
         </td>
       </tr>
       <tr>
-        <td class="p-2">
-          <button>
+        <td>
+          <button class="p-2">
             <app-magnifier-minus-icon [width]="'w-6'" [height]="'h-6'"/>
           </button>
         </td>
-        <td class="p-2">
-          <button>
+        <td>
+          <button class="p-2">
             <app-magnifier-plus-icon [width]="'w-6'" [height]="'h-6'"/>
           </button>
         </td>
