@@ -3,6 +3,7 @@ import { Injectable } from '@angular/core';
 export interface Utterance {
   text: string;
   lang: string;
+  rate: number;
 }
 
 @Injectable({
@@ -24,11 +25,12 @@ export class SpeechService {
     return this.synthesis !== undefined;
   }
 
-  public speak({ text, lang }: Utterance): void {
+  public speak(utterance: Utterance): void {
     if (this.isAvailable()) {
       this.synthesis!.cancel();
-      this.utterance!.text = text;
-      this.utterance!.lang = lang;
+      this.utterance!.text = utterance.text;
+      this.utterance!.lang = utterance.lang;
+      this.utterance!.rate = utterance.rate;
       this.synthesis!.speak(this.utterance!);
     }
   }

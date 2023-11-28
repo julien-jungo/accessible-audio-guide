@@ -5,6 +5,7 @@ import { ContentService, Element } from "../../services/content.service";
 import { BehaviorSubject, Subscription } from "rxjs";
 import { AudioService } from "../../services/audio.service";
 import { config } from "../../configurations/config";
+import { RateService } from "../../services/rate.service";
 
 interface Map { [direction: string]: number | undefined }
 
@@ -44,6 +45,7 @@ export class ReaderComponent implements OnInit, OnDestroy {
     private readonly contentService: ContentService,
     private readonly speechService: SpeechService,
     private readonly audioService: AudioService,
+    private readonly rateService: RateService,
     private readonly route: ActivatedRoute,
   ) {
     this.audio = audioService.audio;
@@ -101,8 +103,9 @@ export class ReaderComponent implements OnInit, OnDestroy {
     const element = this.guide[index];
     this.speechService.speak({
       text: element.text,
-      lang: this.lang
-    })
+      lang: this.lang,
+      rate: this.rateService.getRate(),
+    });
   }
 
   private scroll() {

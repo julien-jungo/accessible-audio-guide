@@ -7,15 +7,15 @@
       <tr>
         <td>
           <button (tap)="setTheme(Theme.LIGHT)"
-                  class="p-1 rounded border-1 border-black dark:border-dark"
-                  [ngClass]="{ 'border': isTheme(Theme.LIGHT) | async }">
+                  class="p-1 rounded outline-1"
+                  [ngClass]="{ 'outline': isTheme(Theme.LIGHT) | async }">
             <app-light-theme-icon [width]="'w-6'" [height]="'h-6'"/>
           </button>
         </td>
         <td>
           <button (tap)="setTheme(Theme.DARK)"
-                  class="p-1 rounded border-1 border-black dark:border-dark"
-                  [ngClass]="{ 'border': isTheme(Theme.DARK) | async }">
+                  class="p-1 rounded outline-1"
+                  [ngClass]="{ 'outline': isTheme(Theme.DARK) | async }">
             <app-dark-theme-icon [width]="'w-6'" [height]="'h-6'"/>
           </button>
         </td>
@@ -25,12 +25,16 @@
       </tr>
       <tr>
         <td>
-          <button class="p-2">
+          <button (tap)="setRate(Rate.SLOW)"
+                  class="p-1 rounded outline-1"
+                  [ngClass]="{ 'outline': isRate(Rate.SLOW) }">
             <app-slow-icon [width]="'w-6'" [height]="'h-6'"/>
           </button>
         </td>
         <td>
-          <button class="p-2">
+          <button (tap)="setRate(Rate.FAST)"
+                  class="p-1 rounded outline-1"
+                  [ngClass]="{ 'outline': isRate(Rate.FAST) }">
             <app-fast-icon [width]="'w-6'" [height]="'h-6'"/>
           </button>
         </td>
