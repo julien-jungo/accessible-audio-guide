@@ -6,8 +6,8 @@
        (tap)       ="onDoubleTap($event)">
     <ng-container *ngFor="let element of guide; index as i">
       <div [ngSwitch]="element.tag" [id]="i" (tap)="onTap($event, i)"
-           [ngClass]="{ 'outline-dashed outline-2 outline-offset-2': isAvailable() && (i === index.value) }"
-           class="cursor-pointer scroll-mt-2 mb-3">
+           [ngClass]="{ 'outline-dashed': isAvailable() && (i === index.value) }"
+           class="cursor-pointer outline-2 outline-offset-2 scroll-mt-2 mb-3">
         <p  *ngSwitchCase="'p'"  class="text-base">                            {{ element.text }}</p>
         <h1 *ngSwitchCase="'h1'" class="font-bold" [ngClass]="textSizes['h1']">{{ element.text }}</h1>
         <h2 *ngSwitchCase="'h2'" class="font-bold" [ngClass]="textSizes['h2']">{{ element.text }}</h2>
