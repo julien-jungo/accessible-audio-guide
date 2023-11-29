@@ -6,39 +6,39 @@
     <tbody>
       <tr>
         <td>
+          <button (tap)="setRate(Rate.FAST)"
+                  class="rounded outline-1 p-2 my-1 me-2"
+                  [ngClass]="{ 'outline': isRate(Rate.FAST) }">
+            <app-fast-icon [width]="'w-6'" [height]="'h-6'"/>
+          </button>
+        </td>
+        <td>
           <button (tap)="setRate(Rate.SLOW)"
-                  class="p-1 rounded outline-1"
+                  class="rounded outline-1 p-2 my-1 me-2"
                   [ngClass]="{ 'outline': isRate(Rate.SLOW) }">
             <app-slow-icon [width]="'w-6'" [height]="'h-6'"/>
           </button>
         </td>
         <td>
-          <button (tap)="setRate(Rate.FAST)"
-                  class="p-1 rounded outline-1"
-                  [ngClass]="{ 'outline': isRate(Rate.FAST) }">
-            <app-fast-icon [width]="'w-6'" [height]="'h-6'"/>
-          </button>
-        </td>
-        <td class="p-2">
           Sprachgeschwindigkeit
         </td>
       </tr>
       <tr>
         <td>
           <button (tap)="setTheme(Theme.LIGHT)"
-                  class="p-1 rounded outline-1"
+                  class="rounded outline-1 p-2 my-1 me-2"
                   [ngClass]="{ 'outline': isTheme(Theme.LIGHT) | async }">
             <app-light-theme-icon [width]="'w-6'" [height]="'h-6'"/>
           </button>
         </td>
         <td>
           <button (tap)="setTheme(Theme.DARK)"
-                  class="p-1 rounded outline-1"
+                  class="rounded outline-1 p-2 my-1 me-2"
                   [ngClass]="{ 'outline': isTheme(Theme.DARK) | async }">
             <app-dark-theme-icon [width]="'w-6'" [height]="'h-6'"/>
           </button>
         </td>
-        <td class="p-2">
+        <td>
           Farbschema
         </td>
       </tr>
