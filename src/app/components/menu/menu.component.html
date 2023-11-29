@@ -7,9 +7,9 @@
 </div>
 <footer class="fixed mx-auto flex justify-around bg-black text-white py-4"
         #menu [ngClass]="[maxWidth, insetX, bottom]">
-  <a [routerLink]="'/'"
-     aria-label="Startseite">
-    <app-home-icon
+  <a [routerLink]="'/settings'"
+     aria-hidden="true">
+    <app-settings-icon
       [width]="'w-14'"
       [height]="'h-14'"/>
   </a>

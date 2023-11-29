@@ -40,6 +40,7 @@ import { FastIconComponent } from './components/icons/fast-icon/fast-icon.compon
 import { SlowIconComponent } from './components/icons/slow-icon/slow-icon.component';
 import { MagnifierMinusIconComponent } from './components/icons/magnifier-minus-icon/magnifier-minus-icon.component';
 import { MagnifierPlusIconComponent } from './components/icons/magnifier-plus-icon/magnifier-plus-icon.component';
+import { SettingsIconComponent } from './components/icons/settings-icon/settings-icon.component';
 
 @Injectable()
 export class MyHammerConfig extends HammerGestureConfig {
@@ -81,7 +82,8 @@ export class MyHammerConfig extends HammerGestureConfig {
     FastIconComponent,
     SlowIconComponent,
     MagnifierMinusIconComponent,
-    MagnifierPlusIconComponent
+    MagnifierPlusIconComponent,
+    SettingsIconComponent
   ],
   imports: [
     BrowserModule,
