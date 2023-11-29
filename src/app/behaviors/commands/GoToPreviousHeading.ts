@@ -2,7 +2,7 @@ import { Element } from '../../services/content.service';
 import { ISwipeCommand } from "./ISwipeCommand";
 
 export class GoToPreviousHeading implements ISwipeCommand {
-  description = 'Zur letzten Überschrift (linear)';
+  description = 'Zu vorheriger Überschrift';
 
   findIndex(elements: Element[], i: number) {
     const segment = elements.slice(0, i).reverse();

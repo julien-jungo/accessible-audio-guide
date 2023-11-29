@@ -2,7 +2,7 @@ import { Element } from '../../services/content.service';
 import { ISwipeCommand } from "./ISwipeCommand";
 
 export class GoToNextHeading implements ISwipeCommand {
-  description = 'Zur nächsten Überschrift (linear)';
+  description = 'Zu nächster Überschrift';
 
   findIndex(elements: Element[], i: number) {
     const min = Math.min(i + 1, elements.length);
