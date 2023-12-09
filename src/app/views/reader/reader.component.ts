@@ -6,6 +6,7 @@ import { BehaviorSubject, Subscription } from "rxjs";
 import { AudioService } from "../../services/audio.service";
 import { config } from "../../configurations/config";
 import { RateService } from "../../services/rate.service";
+import {ISwipeCommand} from "../../behaviors/commands/ISwipeCommand";
 
 interface Map { [direction: string]: number | undefined }
 
@@ -130,81 +131,43 @@ export class ReaderComponent implements OnInit, OnDestroy {
 
   public onSwipeRight() {
     this.onSwipe('RIGHT',
-      () => this.indexForSingleSwipeRight(),
-      () => this.indexForDoubleSwipeRight());
+      this.behavior.singleSwipeRightCommand,
+      this.behavior.doubleSwipeRightCommand);
   }
 
   public onSwipeLeft() {
     this.onSwipe('LEFT',
-      () => this.indexForSingleSwipeLeft(),
-      () => this.indexForDoubleSwipeLeft());
+      this.behavior.singleSwipeLeftCommand,
+      this.behavior.doubleSwipeLeftCommand);
   }
 
   public onSwipeDown() {
     this.onSwipe('DOWN',
-      () => this.indexForSingleSwipeDown(),
-      () => this.indexForDoubleSwipeDown());
+      this.behavior.singleSwipeDownCommand,
+      this.behavior.doubleSwipeDownCommand);
   }
 
   public onSwipeUp() {
     this.onSwipe('UP',
-      () => this.indexForSingleSwipeUp(),
-      () => this.indexForDoubleSwipeUp());
+      this.behavior.singleSwipeUpCommand,
+      this.behavior.doubleSwipeUpCommand);
   }
 
   private onSwipe(direction: string,
-                  indexForSingleSwipe: () => number,
-                  indexForDoubleSwipe: () => number) {
+                  singleSwipeCommand: ISwipeCommand,
+                  doubleSwipeCommand: ISwipeCommand) {
     if (!this.isAvailable()) return; // prevents bug with audio
     if (this.swipeTimeoutIDs[direction] === undefined) {
       this.swipeTimeoutIDs[direction] = setTimeout(() => {
         this.swipeTimeoutIDs[direction] = undefined;
-        this.index.next(indexForSingleSwipe());
+        this.index.next(singleSwipeCommand
+          .findIndex(this.guide, this.index.value!));
       }, 300);
     } else {
       clearTimeout(this.swipeTimeoutIDs[direction]);
       this.swipeTimeoutIDs[direction] = undefined;
-      this.index.next(indexForDoubleSwipe());
+      this.index.next(doubleSwipeCommand
+        .findIndex(this.guide, this.index.value!));
     }
-  }
-
-  private indexForSingleSwipeRight() {
-    return this.behavior.singleSwipeRightCommand
-      .findIndex(this.guide, this.index.value!);
-  }
-
-  private indexForDoubleSwipeRight() {
-    return this.behavior.doubleSwipeRightCommand
-      .findIndex(this.guide, this.index.value!);
-  }
-
-  private indexForSingleSwipeLeft() {
-    return this.behavior.singleSwipeLeftCommand
-      .findIndex(this.guide, this.index.value!);
-  }
-
-  private indexForDoubleSwipeLeft() {
-    return this.behavior.doubleSwipeLeftCommand
-      .findIndex(this.guide, this.index.value!);
-  }
-
-  private indexForSingleSwipeDown() {
-    return this.behavior.singleSwipeDownCommand
-      .findIndex(this.guide, this.index.value!);
-  }
-
-  private indexForDoubleSwipeDown() {
-    return this.behavior.doubleSwipeDownCommand
-      .findIndex(this.guide, this.index.value!);
-  }
-
-  private indexForSingleSwipeUp() {
-    return this.behavior.singleSwipeUpCommand
-      .findIndex(this.guide, this.index.value!);
-  }
-
-  private indexForDoubleSwipeUp() {
-    return this.behavior.doubleSwipeUpCommand
-      .findIndex(this.guide, this.index.value!);
   }
 }
