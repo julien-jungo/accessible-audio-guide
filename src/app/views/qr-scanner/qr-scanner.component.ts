@@ -21,8 +21,7 @@ export class QrScannerComponent implements AfterViewInit, OnDestroy {
   ngAfterViewInit() {
     this.scannerService.scan({
       element: this.video!.nativeElement,
-      onResult: (result, destroy) => {
-        this.destroyScanner = destroy;
+      onResult: result => {
         if (this.ready && result !== '') {
           const url = new URL(result);
           location.href = config.context
@@ -31,7 +30,8 @@ export class QrScannerComponent implements AfterViewInit, OnDestroy {
             + url.hash;
         }
       },
-      onStartup: () => {
+      onStartup: destroy => {
+        this.destroyScanner = destroy;
         // prevent camera glitches
         setTimeout(() => {
           this.ready = true;
