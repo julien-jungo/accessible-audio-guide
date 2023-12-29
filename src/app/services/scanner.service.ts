@@ -3,8 +3,8 @@ import QrScanner from "qr-scanner";
 
 export interface ScanConfig {
   element: HTMLVideoElement;
-  onStartup: (destroy: () => void) => void;
   onResult: (result: string) => void;
+  onStartup: () => void;
 }
 
 @Injectable({
@@ -28,6 +28,8 @@ export class ScannerService {
       }
     );
 
-    scanner.start().then(() => onStartup(scanner.destroy));
+    scanner.start().then(onStartup);
+
+    return scanner.destroy;
   }
 }
